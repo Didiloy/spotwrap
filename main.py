@@ -1,6 +1,9 @@
+import os
 import sys
 from PySide6.QtWidgets import QApplication
 from dotenv import load_dotenv
+from spotdl import Spotdl
+
 from src.controllers.MainWindowController import MainWindowController
 import qdarktheme
 
