@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>SpotWrap</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../assets/ressource.qrc">
+    <normaloff>:/images/images/download.png</normaloff>:/images/images/download.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -91,6 +95,9 @@
         <item>
          <widget class="QWidget" name="widget_3" native="true">
           <layout class="QGridLayout" name="gridLayout_2">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="labelCoverAlbum">
              <property name="sizePolicy">
@@ -116,27 +123,7 @@
               <property name="spacing">
                <number>0</number>
               </property>
-              <item row="0" column="0">
-               <widget class="QLabel" name="labelTitle">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>18</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QWidget" name="widget_4" native="true">
                 <layout class="QHBoxLayout" name="horizontalLayout_2">
                  <property name="leftMargin">
@@ -179,6 +166,44 @@
                   </widget>
                  </item>
                 </layout>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelTitle">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>18</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelNbTitle">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
                </widget>
               </item>
              </layout>

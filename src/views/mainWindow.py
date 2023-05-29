@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
     QVBoxLayout, QWidget)
 import assets.ressource
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -30,6 +31,9 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+        icon = QIcon()
+        icon.addFile(u":/images/images/download.png", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.gridLayout = QGridLayout(MainWindow)
         self.gridLayout.setObjectName(u"gridLayout")
         self.verticalLayout = QVBoxLayout()
@@ -60,9 +64,9 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.search.sizePolicy().hasHeightForWidth())
         self.search.setSizePolicy(sizePolicy2)
         self.search.setMinimumSize(QSize(50, 0))
-        icon = QIcon()
-        icon.addFile(u":/images/images/search.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.search.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/images/images/search.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.search.setIcon(icon1)
         self.search.setCheckable(False)
 
         self.horizontalLayout.addWidget(self.search, 0, Qt.AlignRight)
@@ -78,6 +82,7 @@ class Ui_MainWindow(object):
         self.widget_3.setObjectName(u"widget_3")
         self.gridLayout_2 = QGridLayout(self.widget_3)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(0, -1, -1, -1)
         self.labelCoverAlbum = QLabel(self.widget_3)
         self.labelCoverAlbum.setObjectName(u"labelCoverAlbum")
         sizePolicy2.setHeightForWidth(self.labelCoverAlbum.sizePolicy().hasHeightForWidth())
@@ -91,20 +96,6 @@ class Ui_MainWindow(object):
         self.gridLayout_4 = QGridLayout(self.awidget_4)
         self.gridLayout_4.setSpacing(0)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.labelTitle = QLabel(self.awidget_4)
-        self.labelTitle.setObjectName(u"labelTitle")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
-        self.labelTitle.setSizePolicy(sizePolicy3)
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.labelTitle.setFont(font)
-
-        self.gridLayout_4.addWidget(self.labelTitle, 0, 0, 1, 1)
-
         self.widget_4 = QWidget(self.awidget_4)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_4)
@@ -112,18 +103,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, -1, -1)
         self.labelArtistName = QLabel(self.widget_4)
         self.labelArtistName.setObjectName(u"labelArtistName")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
-        self.labelArtistName.setSizePolicy(sizePolicy4)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
+        self.labelArtistName.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_2.addWidget(self.labelArtistName)
 
         self.labelSeparator = QLabel(self.widget_4)
         self.labelSeparator.setObjectName(u"labelSeparator")
-        sizePolicy4.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
-        self.labelSeparator.setSizePolicy(sizePolicy4)
+        sizePolicy3.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
+        self.labelSeparator.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_2.addWidget(self.labelSeparator)
 
@@ -133,7 +124,34 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.labelDate)
 
 
-        self.gridLayout_4.addWidget(self.widget_4, 1, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.widget_4, 2, 0, 1, 1)
+
+        self.labelTitle = QLabel(self.awidget_4)
+        self.labelTitle.setObjectName(u"labelTitle")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
+        self.labelTitle.setSizePolicy(sizePolicy4)
+        font = QFont()
+        font.setPointSize(18)
+        font.setBold(True)
+        self.labelTitle.setFont(font)
+
+        self.gridLayout_4.addWidget(self.labelTitle, 0, 0, 1, 1)
+
+        self.labelNbTitle = QLabel(self.awidget_4)
+        self.labelNbTitle.setObjectName(u"labelNbTitle")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.labelNbTitle.sizePolicy().hasHeightForWidth())
+        self.labelNbTitle.setSizePolicy(sizePolicy5)
+        font1 = QFont()
+        font1.setItalic(True)
+        self.labelNbTitle.setFont(font1)
+
+        self.gridLayout_4.addWidget(self.labelNbTitle, 1, 0, 1, 1)
 
 
         self.gridLayout_2.addWidget(self.awidget_4, 0, 1, 1, 1)
@@ -179,9 +197,10 @@ class Ui_MainWindow(object):
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search..", None))
         self.search.setText("")
         self.labelCoverAlbum.setText("")
-        self.labelTitle.setText("")
         self.labelArtistName.setText("")
         self.labelSeparator.setText("")
         self.labelDate.setText("")
+        self.labelTitle.setText("")
+        self.labelNbTitle.setText("")
     # retranslateUi
 
