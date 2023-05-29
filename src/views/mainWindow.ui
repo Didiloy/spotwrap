@@ -165,6 +165,36 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="buttonPath">
+                   <property name="text">
+                    <string>Emplacement</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="buttonDownloadAll">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="text">
+                    <string>Tout télécharger</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </widget>
               </item>

@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QListWidget,
     QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
-    QVBoxLayout, QWidget)
+    QSpacerItem, QVBoxLayout, QWidget)
 import assets.ressource
 
 class Ui_MainWindow(object):
@@ -123,6 +123,21 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.labelDate)
 
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+
+        self.buttonPath = QPushButton(self.widget_4)
+        self.buttonPath.setObjectName(u"buttonPath")
+
+        self.horizontalLayout_2.addWidget(self.buttonPath)
+
+        self.buttonDownloadAll = QPushButton(self.widget_4)
+        self.buttonDownloadAll.setObjectName(u"buttonDownloadAll")
+        self.buttonDownloadAll.setEnabled(True)
+
+        self.horizontalLayout_2.addWidget(self.buttonDownloadAll)
+
 
         self.gridLayout_4.addWidget(self.widget_4, 2, 0, 1, 1)
 
@@ -200,6 +215,8 @@ class Ui_MainWindow(object):
         self.labelArtistName.setText("")
         self.labelSeparator.setText("")
         self.labelDate.setText("")
+        self.buttonPath.setText(QCoreApplication.translate("MainWindow", u"Emplacement", None))
+        self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
         self.labelTitle.setText("")
         self.labelNbTitle.setText("")
     # retranslateUi

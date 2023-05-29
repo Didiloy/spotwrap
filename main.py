@@ -1,14 +1,18 @@
 import os
 import sys
+
+import platformdirs
 from PySide6.QtWidgets import QApplication
 from dotenv import load_dotenv
-from spotdl import Spotdl
 
 from src.controllers.MainWindowController import MainWindowController
 import qdarktheme
 
-#load environment variables
+from src.utils.Config import Config
+
+# load environment variables
 load_dotenv()
+config = Config.get_instance()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
