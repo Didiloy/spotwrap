@@ -19,8 +19,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QListWidget,
     QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
     QVBoxLayout, QWidget)
-from assets import ressource
-
+import assets.ressource
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -175,7 +174,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Form", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"SpotWrap", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search..", None))
         self.search.setText("")
