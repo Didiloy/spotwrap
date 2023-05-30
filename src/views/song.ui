@@ -111,21 +111,9 @@
     </spacer>
    </item>
    <item>
-    <widget class="QPushButton" name="buttonDownloadSingleSong">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>94</width>
-       <height>36</height>
-      </size>
-     </property>
+    <widget class="QLabel" name="labelDuration">
      <property name="text">
-      <string>Télécharger</string>
+      <string/>
      </property>
     </widget>
    </item>

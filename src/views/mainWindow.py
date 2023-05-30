@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QListWidget,
-    QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+    QListWidgetItem, QProgressBar, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 import assets.ressource
 
 class Ui_MainWindow(object):
@@ -96,6 +96,56 @@ class Ui_MainWindow(object):
         self.gridLayout_4 = QGridLayout(self.awidget_4)
         self.gridLayout_4.setSpacing(0)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.labelNbTitle = QLabel(self.awidget_4)
+        self.labelNbTitle.setObjectName(u"labelNbTitle")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.labelNbTitle.sizePolicy().hasHeightForWidth())
+        self.labelNbTitle.setSizePolicy(sizePolicy3)
+        font = QFont()
+        font.setItalic(True)
+        self.labelNbTitle.setFont(font)
+
+        self.gridLayout_4.addWidget(self.labelNbTitle, 1, 0, 1, 1)
+
+        self.widget_5 = QWidget(self.awidget_4)
+        self.widget_5.setObjectName(u"widget_5")
+        self.horizontalLayout_3 = QHBoxLayout(self.widget_5)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, -1)
+        self.labelTitle = QLabel(self.widget_5)
+        self.labelTitle.setObjectName(u"labelTitle")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
+        self.labelTitle.setSizePolicy(sizePolicy4)
+        font1 = QFont()
+        font1.setPointSize(18)
+        font1.setBold(True)
+        self.labelTitle.setFont(font1)
+
+        self.horizontalLayout_3.addWidget(self.labelTitle)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_2)
+
+        self.progressBar = QProgressBar(self.widget_5)
+        self.progressBar.setObjectName(u"progressBar")
+        sizePolicy2.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
+        self.progressBar.setSizePolicy(sizePolicy2)
+        self.progressBar.setMinimumSize(QSize(230, 10))
+        self.progressBar.setMaximumSize(QSize(16777215, 10))
+        self.progressBar.setMaximum(0)
+        self.progressBar.setValue(-1)
+
+        self.horizontalLayout_3.addWidget(self.progressBar)
+
+
+        self.gridLayout_4.addWidget(self.widget_5, 0, 0, 1, 1)
+
         self.widget_4 = QWidget(self.awidget_4)
         self.widget_4.setObjectName(u"widget_4")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_4)
@@ -103,18 +153,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, -1, -1)
         self.labelArtistName = QLabel(self.widget_4)
         self.labelArtistName.setObjectName(u"labelArtistName")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
-        self.labelArtistName.setSizePolicy(sizePolicy3)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
+        self.labelArtistName.setSizePolicy(sizePolicy5)
 
         self.horizontalLayout_2.addWidget(self.labelArtistName)
 
         self.labelSeparator = QLabel(self.widget_4)
         self.labelSeparator.setObjectName(u"labelSeparator")
-        sizePolicy3.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
-        self.labelSeparator.setSizePolicy(sizePolicy3)
+        sizePolicy5.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
+        self.labelSeparator.setSizePolicy(sizePolicy5)
 
         self.horizontalLayout_2.addWidget(self.labelSeparator)
 
@@ -140,33 +190,6 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_4.addWidget(self.widget_4, 2, 0, 1, 1)
-
-        self.labelTitle = QLabel(self.awidget_4)
-        self.labelTitle.setObjectName(u"labelTitle")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
-        self.labelTitle.setSizePolicy(sizePolicy4)
-        font = QFont()
-        font.setPointSize(18)
-        font.setBold(True)
-        self.labelTitle.setFont(font)
-
-        self.gridLayout_4.addWidget(self.labelTitle, 0, 0, 1, 1)
-
-        self.labelNbTitle = QLabel(self.awidget_4)
-        self.labelNbTitle.setObjectName(u"labelNbTitle")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.labelNbTitle.sizePolicy().hasHeightForWidth())
-        self.labelNbTitle.setSizePolicy(sizePolicy5)
-        font1 = QFont()
-        font1.setItalic(True)
-        self.labelNbTitle.setFont(font1)
-
-        self.gridLayout_4.addWidget(self.labelNbTitle, 1, 0, 1, 1)
 
 
         self.gridLayout_2.addWidget(self.awidget_4, 0, 1, 1, 1)
@@ -212,12 +235,12 @@ class Ui_MainWindow(object):
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search..", None))
         self.search.setText("")
         self.labelCoverAlbum.setText("")
+        self.labelNbTitle.setText("")
+        self.labelTitle.setText("")
         self.labelArtistName.setText("")
         self.labelSeparator.setText("")
         self.labelDate.setText("")
         self.buttonPath.setText(QCoreApplication.translate("MainWindow", u"Emplacement", None))
         self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
-        self.labelTitle.setText("")
-        self.labelNbTitle.setText("")
     # retranslateUi
 

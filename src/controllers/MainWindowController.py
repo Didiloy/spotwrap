@@ -35,6 +35,7 @@ class MainWindowController(QWidget):
         self.threadpool = QThreadPool()
         self.songs: List[Song] = []
         self.query = ""
+        self.ui.progressBar.setVisible(False)
 
     def search(self):
         self.resetUI()
@@ -64,7 +65,7 @@ class MainWindowController(QWidget):
         self.ui.search.setDisabled(False)
         songs = self.sortSongs(songs)
         for song in songs:
-            songItem = SongController(song.artists, song.name, song.track_number)
+            songItem = SongController(song)
             item = QListWidgetItem(self.ui.listWidget)
             item.setSizeHint(songItem.sizeHint())
             self.ui.listWidget.addItem(item)
@@ -88,6 +89,9 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(False)
         self.ui.buttonDownloadAll.setVisible(False)
         self.ui.listWidget.clear()
+        self.ui.progressBar.setVisible(False)
+        self.ui.lineEdit.setDisabled(False)
+        self.ui.search.setDisabled(False)
 
     def select_directory(self):
         options = QFileDialog.Options()
@@ -110,6 +114,7 @@ class MainWindowController(QWidget):
             return
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
+        self.ui.progressBar.setVisible(True)
         self.downloadAllWorker = DownloadAllWorker(self.query)
         self.downloadAllWorker.signals.result.connect(self.resetUI)
         # Execute

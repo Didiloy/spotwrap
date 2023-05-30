@@ -16,8 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_song(object):
     def setupUi(self, song):
@@ -29,7 +28,7 @@ class Ui_song(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(song.sizePolicy().hasHeightForWidth())
         song.setSizePolicy(sizePolicy)
-        song.setMinimumSize(QSize(0, 100))
+        song.setMinimumSize(QSize(0, 80))
         self.horizontalLayout = QHBoxLayout(song)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.labelTrackNumber = QLabel(song)
@@ -91,16 +90,10 @@ class Ui_song(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
-        self.buttonDownloadSingleSong = QPushButton(song)
-        self.buttonDownloadSingleSong.setObjectName(u"buttonDownloadSingleSong")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.buttonDownloadSingleSong.sizePolicy().hasHeightForWidth())
-        self.buttonDownloadSingleSong.setSizePolicy(sizePolicy3)
-        self.buttonDownloadSingleSong.setMinimumSize(QSize(94, 36))
+        self.labelDuration = QLabel(song)
+        self.labelDuration.setObjectName(u"labelDuration")
 
-        self.horizontalLayout.addWidget(self.buttonDownloadSingleSong)
+        self.horizontalLayout.addWidget(self.labelDuration)
 
 
         self.retranslateUi(song)
@@ -113,6 +106,6 @@ class Ui_song(object):
         self.labelTrackNumber.setText("")
         self.labelSongTitle.setText("")
         self.labelSongArtists.setText("")
-        self.buttonDownloadSingleSong.setText(QCoreApplication.translate("song", u"T\u00e9l\u00e9charger", None))
+        self.labelDuration.setText("")
     # retranslateUi
 
