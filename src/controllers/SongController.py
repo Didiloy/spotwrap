@@ -5,6 +5,7 @@ from PySide6.QtGui import QPainter, QColor, QPaintEvent
 from PySide6.QtWidgets import QWidget
 from spotdl import Song
 
+from src.utils.Config import Config
 from src.utils.Spotdl import SpotdlSingleton
 from src.views.song import Ui_song
 
@@ -25,3 +26,4 @@ class SongController(QWidget):
         minutes = int(minutes)
         seconds = int(seconds)
         self.ui.labelDuration.setText(f"{minutes}:{seconds}")
+        self.ui.widget_2.setStyleSheet(f"background-color:white;border:0px;border-radius:10px;")

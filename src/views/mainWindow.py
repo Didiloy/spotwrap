@@ -16,9 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QLayout, QLineEdit, QListWidget,
-    QListWidgetItem, QProgressBar, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+    QLabel, QLayout, QLineEdit, QListView,
+    QListWidget, QListWidgetItem, QProgressBar, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 import assets.ressource
 
 class Ui_MainWindow(object):
@@ -88,6 +89,7 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.labelCoverAlbum.sizePolicy().hasHeightForWidth())
         self.labelCoverAlbum.setSizePolicy(sizePolicy2)
         self.labelCoverAlbum.setMinimumSize(QSize(150, 150))
+        self.labelCoverAlbum.setMargin(4)
 
         self.gridLayout_2.addWidget(self.labelCoverAlbum, 0, 0, 1, 1)
 
@@ -209,7 +211,9 @@ class Ui_MainWindow(object):
         self.listWidget = QListWidget(self.scrollAreaWidgetContents)
         self.listWidget.setObjectName(u"listWidget")
         self.listWidget.setFrameShape(QFrame.NoFrame)
-        self.listWidget.setSpacing(5)
+        self.listWidget.setResizeMode(QListView.Adjust)
+        self.listWidget.setSpacing(0)
+        self.listWidget.setViewMode(QListView.ListMode)
 
         self.gridLayout_3.addWidget(self.listWidget, 0, 0, 1, 1)
 

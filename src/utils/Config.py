@@ -24,6 +24,8 @@ class Config:
             with open(self.SAVE_PATH_FILE, "r") as f:
                 self.SAVE_PATH = f.read()
 
+            self.SECONDARY_BACKGROUND_COLOR = "rgb(239, 242, 233)"
+
         else:
             raise Exception("You cannot create another Config class")
 

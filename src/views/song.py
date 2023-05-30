@@ -31,7 +31,15 @@ class Ui_song(object):
         song.setMinimumSize(QSize(0, 80))
         self.horizontalLayout = QHBoxLayout(song)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.labelTrackNumber = QLabel(song)
+        self.widget_2 = QWidget(song)
+        self.widget_2.setObjectName(u"widget_2")
+        sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
+        self.widget_2.setSizePolicy(sizePolicy)
+        self.widget_2.setMinimumSize(QSize(0, 80))
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(-1, 0, -1, -1)
+        self.labelTrackNumber = QLabel(self.widget_2)
         self.labelTrackNumber.setObjectName(u"labelTrackNumber")
         sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
@@ -39,16 +47,16 @@ class Ui_song(object):
         sizePolicy1.setHeightForWidth(self.labelTrackNumber.sizePolicy().hasHeightForWidth())
         self.labelTrackNumber.setSizePolicy(sizePolicy1)
 
-        self.horizontalLayout.addWidget(self.labelTrackNumber)
+        self.horizontalLayout_2.addWidget(self.labelTrackNumber)
 
-        self.line_2 = QFrame(song)
+        self.line_2 = QFrame(self.widget_2)
         self.line_2.setObjectName(u"line_2")
         self.line_2.setFrameShape(QFrame.VLine)
         self.line_2.setFrameShadow(QFrame.Sunken)
 
-        self.horizontalLayout.addWidget(self.line_2)
+        self.horizontalLayout_2.addWidget(self.line_2)
 
-        self.widget = QWidget(song)
+        self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -84,16 +92,19 @@ class Ui_song(object):
         self.verticalLayout.addWidget(self.labelSongArtists)
 
 
-        self.horizontalLayout.addWidget(self.widget)
+        self.horizontalLayout_2.addWidget(self.widget)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(507, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
-        self.labelDuration = QLabel(song)
+        self.labelDuration = QLabel(self.widget_2)
         self.labelDuration.setObjectName(u"labelDuration")
 
-        self.horizontalLayout.addWidget(self.labelDuration)
+        self.horizontalLayout_2.addWidget(self.labelDuration)
+
+
+        self.horizontalLayout.addWidget(self.widget_2)
 
 
         self.retranslateUi(song)

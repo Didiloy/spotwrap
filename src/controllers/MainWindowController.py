@@ -1,20 +1,16 @@
-import asyncio
-import os
-import threading
-from datetime import time, datetime
 from typing import List
 
 import requests
 from PySide6.QtCore import QThreadPool
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
-from spotdl import Song, Spotdl
+from spotdl import Song
 
 from src.controllers.SongController import SongController
 from src.utils.Config import Config
 from src.utils.DownloadAllWorker import DownloadAllWorker
 from src.utils.SearchWorker import SearchWorker
-from src.utils.Spotdl import SpotdlSingleton
+import qdarktheme
 from src.views.mainWindow import Ui_MainWindow
 
 
@@ -36,6 +32,7 @@ class MainWindowController(QWidget):
         self.songs: List[Song] = []
         self.query = ""
         self.ui.progressBar.setVisible(False)
+        self.ui.labelCoverAlbum.setStyleSheet("padding-left:10px;")
 
     def search(self):
         self.resetUI()
@@ -63,11 +60,15 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(True)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
+        self.ui.widget_3.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
+        self.ui.listWidget.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
         songs = self.sortSongs(songs)
         for song in songs:
             songItem = SongController(song)
+            hint = songItem.sizeHint()
+            hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
-            item.setSizeHint(songItem.sizeHint())
+            item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
 
@@ -89,6 +90,8 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(False)
         self.ui.buttonDownloadAll.setVisible(False)
         self.ui.listWidget.clear()
+        self.ui.widget_3.setStyleSheet("")
+        self.ui.listWidget.setStyleSheet("")
         self.ui.progressBar.setVisible(False)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)

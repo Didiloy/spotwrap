@@ -20,7 +20,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindowController()
     # setup stylesheet
-    qdarktheme.setup_theme("auto", default_theme="dark")
+    qdarktheme.setup_theme("light", default_theme="light")
     window.show()
     # spotdl = SpotdlSingleton.get_instance().spotdl
     # songs = spotdl.search(["https://open.spotify.com/album/5cnpjofSRJPxR22AriH7Q9?si=TiGu-Iw8RqOxpr7yHwYV7w"])
