@@ -11,7 +11,7 @@ class SpotdlSingleton:
        """
         if SpotdlSingleton.__instance__ is None:
             SpotdlSingleton.__instance__ = self
-            self.spotdl = Spotdl(os.getenv("CLIENT_ID"), os.getenv("CLIENT_SECRET"))
+            self.spotdl: Spotdl = Spotdl(os.getenv("CLIENT_ID"), os.getenv("CLIENT_SECRET"))
         else:
             raise Exception("You cannot create another SpotdlSingleton class")
 

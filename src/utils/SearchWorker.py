@@ -1,5 +1,5 @@
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
-from src.utils import Spotdl
+from src.utils.Spotdl import SpotdlSingleton
 
 
 class WorkerSignals(QObject):
@@ -18,6 +18,6 @@ class SearchWorker(QRunnable):
 
     @Slot()  # QtCore.Slot
     def run(self):
-        spotdl = Spotdl.SpotdlSingleton.get_instance().spotdl
+        spotdl = SpotdlSingleton.get_instance().spotdl
         songs = spotdl.search([self.search])
         self.signals.result.emit(songs)  # Return the result of the processing

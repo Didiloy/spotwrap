@@ -1,11 +1,20 @@
+import asyncio
+import os
+import threading
+from datetime import time, datetime
+from typing import List
+
 import requests
 from PySide6.QtCore import QThreadPool
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
+from spotdl import Song, Spotdl
 
 from src.controllers.SongController import SongController
 from src.utils.Config import Config
-from src.utils.Search import SearchWorker
+from src.utils.DownloadAllWorker import DownloadAllWorker
+from src.utils.SearchWorker import SearchWorker
+from src.utils.Spotdl import SpotdlSingleton
 from src.views.mainWindow import Ui_MainWindow
 
 
@@ -20,22 +29,28 @@ class MainWindowController(QWidget):
         # connect the enter key to the search button
         self.ui.lineEdit.returnPressed.connect(self.ui.search.click)
         self.ui.buttonPath.clicked.connect(self.select_directory)
+        self.ui.buttonDownloadAll.clicked.connect(self.downloadAll)
         self.searchWorker = SearchWorker("")
+        self.downloadAllWorker = None
         self.threadpool = QThreadPool()
+        self.songs: List[Song] = []
+        self.query = ""
 
     def search(self):
         self.resetUI()
         if self.ui.lineEdit.text() == "":
             return
+        self.query = self.ui.lineEdit.text()
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
-        self.searchWorker = SearchWorker(self.ui.lineEdit.text())
+        self.searchWorker = SearchWorker(self.query)
         self.searchWorker.signals.result.connect(self.updateUI)
         # Execute
         self.threadpool.start(self.searchWorker)
 
     def updateUI(self, songs):
         self.ui.lineEdit.setText("")
+        self.songs = songs
         song = songs[0]
         self.ui.labelTitle.setText(song.album_name)
         self.ui.labelArtistName.setText(song.artist)
@@ -47,9 +62,9 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(True)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
-
+        songs = self.sortSongs(songs)
         for song in songs:
-            songItem = SongController(song.artist, song.name, song.track_number)
+            songItem = SongController(song.artists, song.name, song.track_number)
             item = QListWidgetItem(self.ui.listWidget)
             item.setSizeHint(songItem.sizeHint())
             self.ui.listWidget.addItem(item)
@@ -63,6 +78,7 @@ class MainWindowController(QWidget):
         self.ui.labelCoverAlbum.setPixmap(pixmap)
 
     def resetUI(self):
+        self.songs = []
         self.ui.labelTitle.setText("")
         self.ui.labelArtistName.setText("")
         self.ui.labelSeparator.setText("")
@@ -78,13 +94,27 @@ class MainWindowController(QWidget):
         options |= QFileDialog.Option.DontUseNativeDialog
 
         directory = QFileDialog.getExistingDirectory(
-            self, "Select Directory", options=options
+            self, "Select Directory", dir=Config.get_instance().SAVE_PATH, options=options
         )
         if directory == "" or directory is None:
             return
         if directory != Config.get_instance().SAVE_PATH:
             Config.get_instance().SAVE_PATH = directory
             Config.get_instance().saveNewSavePath()
+
+    def sortSongs(self, songs: List[Song]):
+        return sorted(songs, key=lambda song: song.track_number)
+
+    def downloadAll(self):
+        if self.songs == []:
+            return
+        self.ui.lineEdit.setDisabled(True)
+        self.ui.search.setDisabled(True)
+        self.downloadAllWorker = DownloadAllWorker(self.query)
+        self.downloadAllWorker.signals.result.connect(self.resetUI)
+        # Execute
+        self.threadpool.start(self.downloadAllWorker)
+
 
     # @QtCore.Slot()
     # def updateSpinnerAnimation(self):
