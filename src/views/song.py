@@ -58,17 +58,50 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.line_2)
 
+        self.widget_3 = QWidget(self.widget_2)
+        self.widget_3.setObjectName(u"widget_3")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
+        self.widget_3.setSizePolicy(sizePolicy2)
+        self.widget_3.setMinimumSize(QSize(0, 79))
+        self.verticalLayout_2 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalSpacer_3 = QSpacerItem(20, 29, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer_3)
+
+        self.labelAlbumCover = QLabel(self.widget_3)
+        self.labelAlbumCover.setObjectName(u"labelAlbumCover")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.labelAlbumCover.sizePolicy().hasHeightForWidth())
+        self.labelAlbumCover.setSizePolicy(sizePolicy3)
+        self.labelAlbumCover.setMinimumSize(QSize(70, 70))
+        self.labelAlbumCover.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.labelAlbumCover)
+
+        self.verticalSpacer = QSpacerItem(20, 29, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
+
+
+        self.horizontalLayout_2.addWidget(self.widget_3)
+
         self.widget = QWidget(self.widget_2)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.labelSongTitle = QLabel(self.widget)
         self.labelSongTitle.setObjectName(u"labelSongTitle")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.labelSongTitle.sizePolicy().hasHeightForWidth())
-        self.labelSongTitle.setSizePolicy(sizePolicy2)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.labelSongTitle.sizePolicy().hasHeightForWidth())
+        self.labelSongTitle.setSizePolicy(sizePolicy4)
         font = QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -85,8 +118,8 @@ class Ui_song(object):
 
         self.labelSongArtists = QLabel(self.widget)
         self.labelSongArtists.setObjectName(u"labelSongArtists")
-        sizePolicy2.setHeightForWidth(self.labelSongArtists.sizePolicy().hasHeightForWidth())
-        self.labelSongArtists.setSizePolicy(sizePolicy2)
+        sizePolicy4.setHeightForWidth(self.labelSongArtists.sizePolicy().hasHeightForWidth())
+        self.labelSongArtists.setSizePolicy(sizePolicy4)
         font1 = QFont()
         font1.setItalic(True)
         self.labelSongArtists.setFont(font1)
@@ -116,9 +149,6 @@ class Ui_song(object):
 
         self.progressBar = QProgressBar(self.widget_2)
         self.progressBar.setObjectName(u"progressBar")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
         self.progressBar.setSizePolicy(sizePolicy3)
         self.progressBar.setMinimumSize(QSize(90, 10))
@@ -144,6 +174,7 @@ class Ui_song(object):
     def retranslateUi(self, song):
         song.setWindowTitle(QCoreApplication.translate("song", u"Form", None))
         self.labelTrackNumber.setText("")
+        self.labelAlbumCover.setText("")
         self.labelSongTitle.setText("")
         self.labelSongArtists.setText("")
         self.labelDuration.setText("")

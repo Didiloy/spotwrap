@@ -37,7 +37,6 @@ class DownloadAllWorker(QRunnable):
         except:
             self.signals.failed.emit("Failed")  # Return the result of the processing
 
-
     def convertStringToQuality(self, quality: str) -> Quality:
         if quality == "WORST":
             return Quality.WORST

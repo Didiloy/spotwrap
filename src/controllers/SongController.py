@@ -1,3 +1,4 @@
+import requests
 from PySide6.QtCore import QThreadPool, Signal
 from PySide6.QtGui import QPainter, QColor, QPaintEvent, QPixmap
 from PySide6.QtWidgets import QWidget
@@ -38,6 +39,7 @@ class SongController(QWidget):
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.query = f"{self.song.name} artist:{self.song.artist} album:{self.song.album_name}"
+        self.getAndSetImageFromUrl(self.song.cover_url)
 
     def setQuality(self, quality):
         self.quality = quality
@@ -72,4 +74,11 @@ class SongController(QWidget):
         pixmap = pixmap.scaledToWidth(16)
         self.ui.labelDownloadFinished.setPixmap(pixmap)
         self.updateUi()
+
+    def getAndSetImageFromUrl(self, imageURL):
+        request = requests.get(imageURL)
+        pixmap = QPixmap(70, 70)
+        pixmap.loadFromData(request.content)
+        pixmap = pixmap.scaledToWidth(70)
+        self.ui.labelAlbumCover.setPixmap(pixmap)
 
