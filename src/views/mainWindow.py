@@ -186,22 +186,29 @@ class Ui_MainWindow(object):
 
         self.comboBoxOutPutType = QComboBox(self.widget_4)
         self.comboBoxOutPutType.setObjectName(u"comboBoxOutPutType")
+        self.comboBoxOutPutType.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.comboBoxOutPutType)
 
         self.comboBoxQuality = QComboBox(self.widget_4)
         self.comboBoxQuality.setObjectName(u"comboBoxQuality")
+        self.comboBoxQuality.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.comboBoxQuality)
 
         self.buttonPath = QPushButton(self.widget_4)
         self.buttonPath.setObjectName(u"buttonPath")
+        self.buttonPath.setCursor(QCursor(Qt.PointingHandCursor))
+        icon2 = QIcon()
+        icon2.addFile(u":/images/images/folder.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.buttonPath.setIcon(icon2)
 
         self.horizontalLayout_2.addWidget(self.buttonPath)
 
         self.buttonDownloadAll = QPushButton(self.widget_4)
         self.buttonDownloadAll.setObjectName(u"buttonDownloadAll")
         self.buttonDownloadAll.setEnabled(True)
+        self.buttonDownloadAll.setCursor(QCursor(Qt.PointingHandCursor))
 
         self.horizontalLayout_2.addWidget(self.buttonDownloadAll)
 
@@ -260,7 +267,7 @@ class Ui_MainWindow(object):
         self.labelArtistName.setText("")
         self.labelSeparator.setText("")
         self.labelDate.setText("")
-        self.buttonPath.setText(QCoreApplication.translate("MainWindow", u"Emplacement", None))
+        self.buttonPath.setText("")
         self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
     # retranslateUi
 

@@ -283,15 +283,30 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBoxOutPutType"/>
+                  <widget class="QComboBox" name="comboBoxOutPutType">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBoxQuality"/>
+                  <widget class="QComboBox" name="comboBoxQuality">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                  </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="buttonPath">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
                    <property name="text">
-                    <string>Emplacement</string>
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../assets/ressource.qrc">
+                     <normaloff>:/images/images/folder.png</normaloff>:/images/images/folder.png</iconset>
                    </property>
                   </widget>
                  </item>
@@ -299,6 +314,9 @@
                   <widget class="QPushButton" name="buttonDownloadAll">
                    <property name="enabled">
                     <bool>true</bool>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
                    </property>
                    <property name="text">
                     <string>Tout télécharger</string>

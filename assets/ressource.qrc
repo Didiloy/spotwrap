@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/folder.png</file>
     <file>images/cross.png</file>
     <file>images/download.png</file>
     <file>images/loader.gif</file>
