@@ -10,7 +10,6 @@ from src.controllers.SongController import SongController
 from src.utils.Config import Config
 from src.utils.DownloadAllWorker import DownloadAllWorker
 from src.utils.SearchWorker import SearchWorker
-import qdarktheme
 from src.views.mainWindow import Ui_MainWindow
 
 

@@ -1,14 +1,9 @@
-import asyncio
-import os
-from datetime import datetime
-
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
 from savify import Savify, Type
 from savify.utils import PathHolder
 
 from src.utils.Config import Config
 from src.utils.Spotdl import SpotdlSingleton
-from spotdl import Spotdl, Downloader
 
 
 class WorkerSignals(QObject):
