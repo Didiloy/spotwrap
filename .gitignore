@@ -3,3 +3,4 @@ spotwrap_venv
 .idea
 ./**/*.pyc
 **__pycache__**
+.cache
