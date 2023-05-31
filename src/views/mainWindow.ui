@@ -217,6 +217,13 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="labelDownloadFinished">
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </widget>
               </item>
@@ -274,6 +281,12 @@
                     </size>
                    </property>
                   </spacer>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxOutPutType"/>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxQuality"/>
                  </item>
                  <item>
                   <widget class="QPushButton" name="buttonPath">

@@ -14,6 +14,8 @@ from src.views.mainWindow import Ui_MainWindow
 
 
 class MainWindowController(QWidget):
+    QUALITY = ["192K", "WORST", "32K", "96K", "128K", "256K", "320K", "BEST"]
+    OUTPUT_FORMAT = ["MP3", "AAC", "FLAC", "M4A", "OPUS", "VORBIS", "WAV"]
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -32,6 +34,11 @@ class MainWindowController(QWidget):
         self.query = ""
         self.ui.progressBar.setVisible(False)
         self.ui.labelCoverAlbum.setStyleSheet("padding-left:10px;")
+        self.ui.labelDownloadFinished.setVisible(False)
+        self.ui.comboBoxQuality.addItems(MainWindowController.QUALITY)
+        self.ui.comboBoxOutPutType.addItems(MainWindowController.OUTPUT_FORMAT)
+        self.ui.comboBoxQuality.setVisible(False)
+        self.ui.comboBoxOutPutType.setVisible(False)
 
     def search(self):
         self.resetUI()
@@ -60,6 +67,8 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(True)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
+        self.ui.comboBoxQuality.setVisible(True)
+        self.ui.comboBoxOutPutType.setVisible(True)
         self.ui.widget_3.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
         self.ui.listWidget.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
         songs = self.sortSongs(songs)
@@ -95,6 +104,9 @@ class MainWindowController(QWidget):
         self.ui.progressBar.setVisible(False)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
+        self.ui.labelDownloadFinished.setVisible(False)
+        self.ui.comboBoxQuality.setVisible(False)
+        self.ui.comboBoxOutPutType.setVisible(False)
 
     def select_directory(self):
         options = QFileDialog.Options()
@@ -115,11 +127,34 @@ class MainWindowController(QWidget):
     def downloadAll(self):
         if self.songs == []:
             return
+        self.ui.labelDownloadFinished.setVisible(False)
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
         self.ui.progressBar.setVisible(True)
-        self.downloadAllWorker = DownloadAllWorker(self.query)
-        self.downloadAllWorker.signals.result.connect(self.resetUI)
+        quality = self.ui.comboBoxQuality.currentText()
+        if "WORST" or "BEST" not in quality:
+            quality = "Q" + quality
+        output_format = self.ui.comboBoxOutPutType.currentText()
+        self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format)
+        self.downloadAllWorker.signals.result.connect(self.downloadFinished)
+        self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
         # Execute
         self.threadpool.start(self.downloadAllWorker)
 
+    def downloadFinished(self):
+        pixmap = QPixmap(":/images/images/check.png")
+        pixmap = pixmap.scaledToWidth(25)
+        self.ui.labelDownloadFinished.setPixmap(pixmap)
+        self.ui.labelDownloadFinished.setVisible(True)
+        self.ui.progressBar.setVisible(False)
+        self.ui.lineEdit.setDisabled(False)
+        self.ui.search.setDisabled(False)
+
+    def downloadFailed(self):
+        pixmap = QPixmap(":/images/images/cross.png")
+        pixmap = pixmap.scaledToWidth(25)
+        self.ui.labelDownloadFinished.setPixmap(pixmap)
+        self.ui.labelDownloadFinished.setVisible(True)
+        self.ui.progressBar.setVisible(False)
+        self.ui.lineEdit.setDisabled(False)
+        self.ui.search.setDisabled(False)

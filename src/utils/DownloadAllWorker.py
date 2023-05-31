@@ -1,5 +1,5 @@
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
-from savify import Savify, Type
+from savify import Savify, Type, Quality, Format
 from savify.utils import PathHolder
 
 from src.utils.Config import Config
@@ -8,14 +8,17 @@ from src.utils.Spotdl import SpotdlSingleton
 
 class WorkerSignals(QObject):
     result = Signal(object)
+    failed = Signal(object)
 
 
 class DownloadAllWorker(QRunnable):
 
-    def __init__(self, query, *args, **kwargs):
+    def __init__(self, query, quality, output_format, *args, **kwargs):
         super(DownloadAllWorker, self).__init__()
         # Store constructor arguments (re-used for processing)
         self.query = query
+        self.quality = self.convertStringToQuality(quality)
+        self.output_format = self.convertOutputTypeToFormat(output_format)
         self.args = args
         self.kwargs = kwargs
         self.signals = WorkerSignals()
@@ -24,5 +27,50 @@ class DownloadAllWorker(QRunnable):
     def run(self):
         savify: Savify = SpotdlSingleton.get_instance().savify
         savify.path_holder = PathHolder(downloads_path=Config.get_instance().SAVE_PATH)
-        savify.download(self.query, Type.ALBUM)
-        self.signals.result.emit("Done")  # Return the result of the processing
+
+        savify.quality = self.quality
+        savify.download_format = self.output_format
+        try:
+            savify.download(self.query, Type.ALBUM)
+            self.signals.result.emit("Done")  # Return the result of the processing
+        except:
+            self.signals.failed.emit("Failed")  # Return the result of the processing
+
+
+    def convertStringToQuality(self, quality: str) -> Quality:
+        if quality == "WORST":
+            return Quality.WORST
+        elif quality == "Q32K":
+            return Quality.Q32K
+        elif quality == "Q96K":
+            return Quality.Q96K
+        elif quality == "Q128K":
+            return Quality.Q128K
+        elif quality == "Q192K":
+            return Quality.Q192K
+        elif quality == "Q256K":
+            return Quality.Q256K
+        elif quality == "Q320K":
+            return Quality.Q320K
+        elif quality == "BEST":
+            return Quality.BEST
+        else:
+            return Quality.Q192K
+
+    def convertOutputTypeToFormat(self, output: str) -> Format:
+        if output == "MP3":
+            return Format.MP3
+        elif output == "AAC":
+            return Format.AAC
+        elif output == "FLAC":
+            return Format.FLAC
+        elif output == "M4A":
+            return Format.M4A
+        elif output == "OPUS":
+            return Format.OPUS
+        elif output == "VORBIS":
+            return Format.VORBIS
+        elif output == "WAV":
+            return Format.WAV
+        else:
+            return Format.MP3

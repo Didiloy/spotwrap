@@ -1,7 +1,9 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/cross.png</file>
     <file>images/download.png</file>
     <file>images/loader.gif</file>
     <file>images/search.png</file>
+    <file>images/check.png</file>
   </qresource>
 </RCC>

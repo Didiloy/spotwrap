@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QLayout, QLineEdit, QListView,
-    QListWidget, QListWidgetItem, QProgressBar, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QLayout, QLineEdit,
+    QListView, QListWidget, QListWidgetItem, QProgressBar,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 import assets.ressource
 
 class Ui_MainWindow(object):
@@ -145,6 +145,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.progressBar)
 
+        self.labelDownloadFinished = QLabel(self.widget_5)
+        self.labelDownloadFinished.setObjectName(u"labelDownloadFinished")
+
+        self.horizontalLayout_3.addWidget(self.labelDownloadFinished)
+
 
         self.gridLayout_4.addWidget(self.widget_5, 0, 0, 1, 1)
 
@@ -178,6 +183,16 @@ class Ui_MainWindow(object):
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
+
+        self.comboBoxOutPutType = QComboBox(self.widget_4)
+        self.comboBoxOutPutType.setObjectName(u"comboBoxOutPutType")
+
+        self.horizontalLayout_2.addWidget(self.comboBoxOutPutType)
+
+        self.comboBoxQuality = QComboBox(self.widget_4)
+        self.comboBoxQuality.setObjectName(u"comboBoxQuality")
+
+        self.horizontalLayout_2.addWidget(self.comboBoxQuality)
 
         self.buttonPath = QPushButton(self.widget_4)
         self.buttonPath.setObjectName(u"buttonPath")
@@ -241,6 +256,7 @@ class Ui_MainWindow(object):
         self.labelCoverAlbum.setText("")
         self.labelNbTitle.setText("")
         self.labelTitle.setText("")
+        self.labelDownloadFinished.setText("")
         self.labelArtistName.setText("")
         self.labelSeparator.setText("")
         self.labelDate.setText("")
