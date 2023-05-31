@@ -13,12 +13,13 @@ class WorkerSignals(QObject):
 
 class DownloadAllWorker(QRunnable):
 
-    def __init__(self, query, quality, output_format, *args, **kwargs):
+    def __init__(self, query, quality, output_format, search_type, *args, **kwargs):
         super(DownloadAllWorker, self).__init__()
         # Store constructor arguments (re-used for processing)
         self.query = query
         self.quality = self.convertStringToQuality(quality)
         self.output_format = self.convertOutputTypeToFormat(output_format)
+        self.search_type = self.convertStringToType(search_type)
         self.args = args
         self.kwargs = kwargs
         self.signals = WorkerSignals()
@@ -31,7 +32,7 @@ class DownloadAllWorker(QRunnable):
         savify.quality = self.quality
         savify.download_format = self.output_format
         try:
-            savify.download(self.query, Type.ALBUM)
+            savify.download(self.query, query_type=self.search_type)
             self.signals.result.emit("Done")  # Return the result of the processing
         except:
             self.signals.failed.emit("Failed")  # Return the result of the processing
@@ -74,3 +75,13 @@ class DownloadAllWorker(QRunnable):
             return Format.WAV
         else:
             return Format.MP3
+
+    def convertStringToType(self, type: str) -> Type:
+        if type == "ALBUM":
+            return Type.ALBUM
+        elif type == "PLAYLIST":
+            return Type.PLAYLIST
+        elif type == "TRACK":
+            return Type.TRACK
+        else:
+            return Type.ALBUM

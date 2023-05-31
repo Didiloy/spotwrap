@@ -1,7 +1,7 @@
 from typing import List
 
 import requests
-from PySide6.QtCore import QThreadPool
+from PySide6.QtCore import QThreadPool, Signal, QObject
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
 from spotdl import Song
@@ -13,11 +13,16 @@ from src.utils.SearchWorker import SearchWorker
 from src.views.mainWindow import Ui_MainWindow
 
 
+class MainWindowSignals(QObject):
+    quality = Signal(object)
+    output_type = Signal(object)
+
 class MainWindowController(QWidget):
     QUALITY = ["192K", "WORST", "32K", "96K", "128K", "256K", "320K", "BEST"]
     OUTPUT_FORMAT = ["MP3", "AAC", "FLAC", "M4A", "OPUS", "VORBIS", "WAV"]
     def __init__(self):
         super().__init__()
+        self.signals = MainWindowSignals()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.buttonDownloadAll.setVisible(False)
@@ -39,6 +44,14 @@ class MainWindowController(QWidget):
         self.ui.comboBoxOutPutType.addItems(MainWindowController.OUTPUT_FORMAT)
         self.ui.comboBoxQuality.setVisible(False)
         self.ui.comboBoxOutPutType.setVisible(False)
+        self.ui.comboBoxQuality.currentTextChanged.connect(self.qualityChanged)
+        self.ui.comboBoxOutPutType.currentTextChanged.connect(self.outputTypeChanged)
+
+    def qualityChanged(self, quality):
+        self.signals.quality.emit(quality)
+
+    def outputTypeChanged(self, output_type):
+        self.signals.output_type.emit(output_type)
 
     def search(self):
         self.resetUI()
@@ -73,7 +86,7 @@ class MainWindowController(QWidget):
         self.ui.listWidget.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
         songs = self.sortSongs(songs)
         for song in songs:
-            songItem = SongController(song)
+            songItem = SongController(song, self.signals)
             hint = songItem.sizeHint()
             hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
@@ -135,7 +148,11 @@ class MainWindowController(QWidget):
         if "WORST" or "BEST" not in quality:
             quality = "Q" + quality
         output_format = self.ui.comboBoxOutPutType.currentText()
-        self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format)
+        if "open.spotify" and "playlist" in self.query:
+            download_type = "PLAYLIST"
+        else:
+            download_type = "ALBUM"
+        self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format, download_type)
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
         # Execute

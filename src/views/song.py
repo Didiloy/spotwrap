@@ -16,7 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
+import assets.ressource
 
 class Ui_song(object):
     def setupUi(self, song):
@@ -103,6 +105,33 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.labelDuration)
 
+        self.buttonDownload = QPushButton(self.widget_2)
+        self.buttonDownload.setObjectName(u"buttonDownload")
+        self.buttonDownload.setCursor(QCursor(Qt.PointingHandCursor))
+        icon = QIcon()
+        icon.addFile(u":/images/images/download.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.buttonDownload.setIcon(icon)
+
+        self.horizontalLayout_2.addWidget(self.buttonDownload)
+
+        self.progressBar = QProgressBar(self.widget_2)
+        self.progressBar.setObjectName(u"progressBar")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
+        self.progressBar.setSizePolicy(sizePolicy3)
+        self.progressBar.setMinimumSize(QSize(90, 10))
+        self.progressBar.setMaximum(0)
+        self.progressBar.setValue(-1)
+
+        self.horizontalLayout_2.addWidget(self.progressBar)
+
+        self.labelDownloadFinished = QLabel(self.widget_2)
+        self.labelDownloadFinished.setObjectName(u"labelDownloadFinished")
+
+        self.horizontalLayout_2.addWidget(self.labelDownloadFinished)
+
 
         self.horizontalLayout.addWidget(self.widget_2)
 
@@ -118,5 +147,7 @@ class Ui_song(object):
         self.labelSongTitle.setText("")
         self.labelSongArtists.setText("")
         self.labelDuration.setText("")
+        self.buttonDownload.setText("")
+        self.labelDownloadFinished.setText("")
     # retranslateUi
 

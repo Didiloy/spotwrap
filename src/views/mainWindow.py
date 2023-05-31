@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         icon = QIcon()
-        icon.addFile(u":/images/images/download.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/images/images/download_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.gridLayout = QGridLayout(MainWindow)
         self.gridLayout.setObjectName(u"gridLayout")
