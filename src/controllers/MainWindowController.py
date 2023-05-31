@@ -42,6 +42,7 @@ class MainWindowController(QWidget):
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
         self.searchWorker = SearchWorker(self.query)
+        self.searchWorker.signals.failed.connect(self.resetUI())
         self.searchWorker.signals.result.connect(self.updateUI)
         # Execute
         self.threadpool.start(self.searchWorker)
@@ -123,9 +124,3 @@ class MainWindowController(QWidget):
         # Execute
         self.threadpool.start(self.downloadAllWorker)
 
-
-    # @QtCore.Slot()
-    # def updateSpinnerAnimation(self):
-    #     # 'hide' the text of the button
-    #     self.ui.search.setText("")
-    #     self.ui.search.setIcon(QtGui.QIcon(self.animated_spinner.currentPixmap()))

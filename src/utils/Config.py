@@ -1,3 +1,4 @@
+import logging
 import os
 
 import platformdirs
@@ -25,7 +26,8 @@ class Config:
                 self.SAVE_PATH = f.read()
 
             self.SECONDARY_BACKGROUND_COLOR = "rgb(239, 242, 233)"
-
+            logging.basicConfig(filename=f"{self.USER_DATA_PATH}/spotwrap.log", level=logging.DEBUG)
+            self.logger = logging.getLogger()
         else:
             raise Exception("You cannot create another Config class")
 

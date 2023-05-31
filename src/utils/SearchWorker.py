@@ -4,6 +4,7 @@ from src.utils.Spotdl import SpotdlSingleton
 
 class WorkerSignals(QObject):
     result = Signal(object)
+    failed = Signal(object)
 
 
 class SearchWorker(QRunnable):
@@ -19,5 +20,8 @@ class SearchWorker(QRunnable):
     @Slot()  # QtCore.Slot
     def run(self):
         spotdl = SpotdlSingleton.get_instance().spotdl
-        songs = spotdl.search([self.search])
-        self.signals.result.emit(songs)  # Return the result of the processing
+        try:
+            songs = spotdl.search([self.search])
+            self.signals.result.emit(songs)  # Return the result of the processing
+        except:
+            self.signals.failed.emit("Failed")
