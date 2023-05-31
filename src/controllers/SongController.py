@@ -1,6 +1,6 @@
 import requests
-from PySide6.QtCore import QThreadPool, Signal
-from PySide6.QtGui import QPainter, QColor, QPaintEvent, QPixmap
+from PySide6.QtCore import QThreadPool, Signal, Qt
+from PySide6.QtGui import QPainter, QColor, QPaintEvent, QPixmap, QBrush
 from PySide6.QtWidgets import QWidget
 from spotdl import Song
 
@@ -80,5 +80,20 @@ class SongController(QWidget):
         pixmap = QPixmap(70, 70)
         pixmap.loadFromData(request.content)
         pixmap = pixmap.scaledToWidth(70)
-        self.ui.labelAlbumCover.setPixmap(pixmap)
+
+        radius = 10
+
+        # create empty pixmap of same size as original
+        rounded = QPixmap(pixmap.size())
+        rounded.fill(QColor("transparent"))
+
+        # draw rounded rect on new pixmap using original pixmap as brush
+        painter = QPainter(rounded)
+        painter.setRenderHint(QPainter.Antialiasing)
+        painter.setBrush(QBrush(pixmap))
+        painter.setPen(Qt.NoPen)
+        painter.drawRoundedRect(pixmap.rect(), radius, radius)
+        painter.end()
+
+        self.ui.labelAlbumCover.setPixmap(rounded)
 

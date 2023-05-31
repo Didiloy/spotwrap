@@ -1,8 +1,8 @@
 from typing import List
 
 import requests
-from PySide6.QtCore import QThreadPool, Signal, QObject
-from PySide6.QtGui import QPixmap
+from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
+from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
 from spotdl import Song
 
@@ -99,7 +99,22 @@ class MainWindowController(QWidget):
         pixmap = QPixmap(150, 150)
         pixmap.loadFromData(request.content)
         pixmap = pixmap.scaledToWidth(200)
-        self.ui.labelCoverAlbum.setPixmap(pixmap)
+
+        radius = 10
+
+        # create empty pixmap of same size as original
+        rounded = QPixmap(pixmap.size())
+        rounded.fill(QColor("transparent"))
+
+        # draw rounded rect on new pixmap using original pixmap as brush
+        painter = QPainter(rounded)
+        painter.setRenderHint(QPainter.Antialiasing)
+        painter.setBrush(QBrush(pixmap))
+        painter.setPen(Qt.NoPen)
+        painter.drawRoundedRect(pixmap.rect(), radius, radius)
+        painter.end()
+
+        self.ui.labelCoverAlbum.setPixmap(rounded)
 
     def resetUI(self):
         self.songs = []
