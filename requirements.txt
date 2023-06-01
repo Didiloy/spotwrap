@@ -16,8 +16,11 @@ h11==0.14.0
 idna==3.4
 jaconv==0.3.4
 markdown-it-py==2.2.0
+materialyoucolor==1.2.0
 mdurl==0.1.2
 mutagen==1.46.0
+numpy==1.24.3
+Pillow==9.5.0
 platformdirs==3.5.1
 pycryptodomex==3.18.0
 pydantic==1.10.8
@@ -34,6 +37,7 @@ requests==2.31.0
 requests-file==1.5.1
 rich==13.3.5
 savify==2.4.0
+scipy==1.10.1
 shiboken6==6.2.4
 six==1.16.0
 sniffio==1.3.0
@@ -53,6 +57,3 @@ websockets==11.0.3
 wrapt==1.15.0
 yt-dlp==2023.3.4
 ytmusicapi==0.24.1
-Pillow~=9.5.0
-numpy~=1.24.3
-scipy~=1.10.1
