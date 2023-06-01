@@ -53,6 +53,8 @@ class MainWindowController(QWidget):
         self.materialYouOnColorOnPrimary = ""
         self.materialYouColorPrimaryContainer = ""
         self.materialYouOnColorOnPrimaryContainer = ""
+        self.materialYouButtonColor = ""
+        self.materialYouOnButtonColor = ""
 
     def qualityChanged(self, quality):
         self.signals.quality.emit(quality)
@@ -94,6 +96,7 @@ class MainWindowController(QWidget):
             f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
         self.ui.scrollArea.setStyleSheet(
             f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
+        self.ui.buttonDownloadAll.setStyleSheet(f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
         songs = self.sortSongs(songs)
         for song in songs:
             songItem = SongController(song, self.signals)
@@ -132,14 +135,30 @@ class MainWindowController(QWidget):
         try:
             request = requests.get(imageURL, stream=True)
             color = Colors.get_instance().getDominantColorFromImage(request.raw)
-            primaryColor = color["primary"]
+            # primaryColor = color["primary"]
+            # self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
+            # colorOnPrimary = color["onPrimary"]
+            # self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
+            # primaryContainer = color["primaryContainer"]
+            # self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
+            # colorOnPrimaryContainer = color["onPrimaryContainer"]
+            # self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
+            primaryColor = color["secondary"]
             self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
-            colorOnPrimary = color["onPrimary"]
+            colorOnPrimary = color["onSecondary"]
             self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
             primaryContainer = color["primaryContainer"]
             self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
             colorOnPrimaryContainer = color["onPrimaryContainer"]
             self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
+            buttonColor = color["primary"]
+            self.materialYouButtonColor = f"rgb({buttonColor[0]},{buttonColor[1]},{buttonColor[2]})"
+            onButtonColor = color["onPrimary"]
+            self.materialYouOnButtonColor = f"rgb({onButtonColor[0]},{onButtonColor[1]},{onButtonColor[2]})"
+            # print("primaryColor: ", primaryColor)
+            # print("colorOnPrimary: ", colorOnPrimary)
+            # print("primaryContainer: ", primaryContainer)
+            # print("colorOnPrimaryContainer: ", colorOnPrimaryContainer)
         except Exception as e:
             print("Error while getting the color of the album: ", e)
             self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
@@ -161,6 +180,7 @@ class MainWindowController(QWidget):
         self.setStyleSheet("")
         self.ui.widget_3.setStyleSheet("")
         self.ui.scrollArea.setStyleSheet("")
+        self.ui.buttonDownloadAll.setStyleSheet("")
         self.ui.progressBar.setVisible(False)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
