@@ -1,10 +1,10 @@
-import requests
 from PySide6.QtCore import QThreadPool, Signal, Qt
 from PySide6.QtGui import QPainter, QColor, QPaintEvent, QPixmap, QBrush
 from PySide6.QtWidgets import QWidget
 from spotdl import Song
 
 from src.utils.DownloadAllWorker import DownloadAllWorker
+from src.utils.GetImageWorker import GetImageWorker
 from src.views.song import Ui_song
 
 
@@ -21,15 +21,13 @@ class SongController(QWidget):
         self.ui.setupUi(self)
         self.ui.labelTrackNumber.setText(f"{self.song.track_number}")
         self.ui.labelSongTitle.setText(f"{self.song.name}")
-        self.ui.widget.setStyleSheet("background-color:rgba(40,40,150,0);border:0px;")
         artist_name = "/".join(self.song.artists)
         self.ui.labelSongArtists.setText(f"{artist_name}")
-        #convert song duration from milliseconds to minutes and seconds
+        # convert song duration from milliseconds to minutes and seconds
         minutes, seconds = divmod(self.song.duration / 1000, 60)
         minutes = int(minutes)
         seconds = int(seconds)
         self.ui.labelDuration.setText(f"{minutes}:{seconds}")
-        # self.ui.widget_2.setStyleSheet(f"background-color:white;border:0px;border-radius:10px;")
         self.ui.progressBar.setVisible(False)
         pixmap = QPixmap(":/images/images/check.png")
         pixmap.scaledToWidth(16)
@@ -39,7 +37,10 @@ class SongController(QWidget):
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.query = f"{self.song.name} artist:{self.song.artist} album:{self.song.album_name}"
-        self.getAndSetImageFromUrl(self.song.cover_url)
+        self.getImageWorker = GetImageWorker(self.song.cover_url)
+        # self.getAndSetImageFromUrl(self.song.cover_url)
+        self.getImageWorker.signals.result.connect(self.setImage)
+        self.threadpool.start(self.getImageWorker)
 
     def setQuality(self, quality):
         self.quality = quality
@@ -47,12 +48,12 @@ class SongController(QWidget):
     def setOutputType(self, output_type):
         self.output_type = output_type
 
-
     def downloadSong(self):
         self.ui.buttonDownload.setDisabled(True)
         self.ui.progressBar.setVisible(True)
         self.ui.labelDownloadFinished.setVisible(False)
-        self.downloadAllWorker = DownloadAllWorker(self.query, quality=self.quality, output_format=self.output_type, search_type="TRACK")
+        self.downloadAllWorker = DownloadAllWorker(self.query, quality=self.quality, output_format=self.output_type,
+                                                   search_type="TRACK")
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
         # Execute
@@ -75,10 +76,9 @@ class SongController(QWidget):
         self.ui.labelDownloadFinished.setPixmap(pixmap)
         self.updateUi()
 
-    def getAndSetImageFromUrl(self, imageURL):
-        request = requests.get(imageURL)
+    def setImage(self, image):
         pixmap = QPixmap(70, 70)
-        pixmap.loadFromData(request.content)
+        pixmap.loadFromData(image)
         pixmap = pixmap.scaledToWidth(70)
 
         radius = 10
@@ -96,4 +96,3 @@ class SongController(QWidget):
         painter.end()
 
         self.ui.labelAlbumCover.setPixmap(rounded)
-

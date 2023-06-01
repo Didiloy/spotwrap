@@ -4,7 +4,6 @@ import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
-from materialyoucolor.utils.theme_utils import themeFromSourceColor, getDominantColors
 from spotdl import Song
 from src.controllers.SongController import SongController
 from src.utils.Colors import Colors
@@ -100,13 +99,16 @@ class MainWindowController(QWidget):
         songs = self.sortSongs(songs)
         for song in songs:
             songItem = SongController(song, self.signals)
-            songItem.setStyleSheet(f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
+            songItem.setStyleSheet(
+                f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
             hint = songItem.sizeHint()
             hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
             item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
+
+
 
 
     def getAndSetImageFromUrl(self, imageURL):
@@ -135,14 +137,6 @@ class MainWindowController(QWidget):
         try:
             request = requests.get(imageURL, stream=True)
             color = Colors.get_instance().getDominantColorFromImage(request.raw)
-            # primaryColor = color["primary"]
-            # self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
-            # colorOnPrimary = color["onPrimary"]
-            # self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
-            # primaryContainer = color["primaryContainer"]
-            # self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
-            # colorOnPrimaryContainer = color["onPrimaryContainer"]
-            # self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
             primaryColor = color["secondary"]
             self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
             colorOnPrimary = color["onSecondary"]
@@ -155,10 +149,6 @@ class MainWindowController(QWidget):
             self.materialYouButtonColor = f"rgb({buttonColor[0]},{buttonColor[1]},{buttonColor[2]})"
             onButtonColor = color["onPrimary"]
             self.materialYouOnButtonColor = f"rgb({onButtonColor[0]},{onButtonColor[1]},{onButtonColor[2]})"
-            # print("primaryColor: ", primaryColor)
-            # print("colorOnPrimary: ", colorOnPrimary)
-            # print("primaryContainer: ", primaryContainer)
-            # print("colorOnPrimaryContainer: ", colorOnPrimaryContainer)
         except Exception as e:
             print("Error while getting the color of the album: ", e)
             self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
