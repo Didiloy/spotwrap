@@ -1,5 +1,6 @@
 import logging
 import os
+import tempfile
 
 import platformdirs
 
@@ -28,6 +29,8 @@ class Config:
             self.SECONDARY_BACKGROUND_COLOR = "rgb(239, 242, 233)"
             logging.basicConfig(filename=f"{self.USER_DATA_PATH}/spotwrap.log", level=logging.DEBUG)
             self.logger = logging.getLogger()
+
+            self.TEMP_PATH = tempfile.gettempdir()
         else:
             raise Exception("You cannot create another Config class")
 

@@ -53,3 +53,6 @@ websockets==11.0.3
 wrapt==1.15.0
 yt-dlp==2023.3.4
 ytmusicapi==0.24.1
+Pillow~=9.5.0
+numpy~=1.24.3
+scipy~=1.10.1

@@ -4,9 +4,10 @@ import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
+from materialyoucolor.utils.theme_utils import themeFromSourceColor, getDominantColors
 from spotdl import Song
-
 from src.controllers.SongController import SongController
+from src.utils.Colors import Colors
 from src.utils.Config import Config
 from src.utils.DownloadAllWorker import DownloadAllWorker
 from src.utils.SearchWorker import SearchWorker
@@ -17,9 +18,11 @@ class MainWindowSignals(QObject):
     quality = Signal(object)
     output_type = Signal(object)
 
+
 class MainWindowController(QWidget):
     QUALITY = ["192K", "WORST", "32K", "96K", "128K", "256K", "320K", "BEST"]
     OUTPUT_FORMAT = ["MP3", "AAC", "FLAC", "M4A", "OPUS", "VORBIS", "WAV"]
+
     def __init__(self):
         super().__init__()
         self.signals = MainWindowSignals()
@@ -46,6 +49,10 @@ class MainWindowController(QWidget):
         self.ui.comboBoxOutPutType.setVisible(False)
         self.ui.comboBoxQuality.currentTextChanged.connect(self.qualityChanged)
         self.ui.comboBoxOutPutType.currentTextChanged.connect(self.outputTypeChanged)
+        self.materialYouColorPrimary = ""
+        self.materialYouOnColorOnPrimary = ""
+        self.materialYouColorPrimaryContainer = ""
+        self.materialYouOnColorOnPrimaryContainer = ""
 
     def qualityChanged(self, quality):
         self.signals.quality.emit(quality)
@@ -82,11 +89,15 @@ class MainWindowController(QWidget):
         self.ui.search.setDisabled(False)
         self.ui.comboBoxQuality.setVisible(True)
         self.ui.comboBoxOutPutType.setVisible(True)
-        self.ui.widget_3.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
-        self.ui.listWidget.setStyleSheet(f"background-color:{Config.get_instance().SECONDARY_BACKGROUND_COLOR};border:0px;border-radius:10px;")
+        self.setStyleSheet(f"background-color:{self.materialYouColorPrimary};color:{self.materialYouOnColorOnPrimary};")
+        self.ui.widget_3.setStyleSheet(
+            f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
+        self.ui.scrollArea.setStyleSheet(
+            f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
         songs = self.sortSongs(songs)
         for song in songs:
             songItem = SongController(song, self.signals)
+            songItem.setStyleSheet(f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
             hint = songItem.sizeHint()
             hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
@@ -94,8 +105,9 @@ class MainWindowController(QWidget):
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
 
+
     def getAndSetImageFromUrl(self, imageURL):
-        request = requests.get(imageURL)
+        request = requests.get(imageURL, stream=True)
         pixmap = QPixmap(150, 150)
         pixmap.loadFromData(request.content)
         pixmap = pixmap.scaledToWidth(200)
@@ -116,6 +128,25 @@ class MainWindowController(QWidget):
 
         self.ui.labelCoverAlbum.setPixmap(rounded)
 
+        # Setting the material you color of the album
+        try:
+            request = requests.get(imageURL, stream=True)
+            color = Colors.get_instance().getDominantColorFromImage(request.raw)
+            primaryColor = color["primary"]
+            self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
+            colorOnPrimary = color["onPrimary"]
+            self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
+            primaryContainer = color["primaryContainer"]
+            self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
+            colorOnPrimaryContainer = color["onPrimaryContainer"]
+            self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
+        except Exception as e:
+            print("Error while getting the color of the album: ", e)
+            self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
+            self.materialYouOnColorOnPrimary = Colors.get_instance().ON_SECONDARY_BACKGROUND_COLOR
+
+
+
     def resetUI(self):
         self.songs = []
         self.ui.labelTitle.setText("")
@@ -127,8 +158,9 @@ class MainWindowController(QWidget):
         self.ui.buttonPath.setVisible(False)
         self.ui.buttonDownloadAll.setVisible(False)
         self.ui.listWidget.clear()
+        self.setStyleSheet("")
         self.ui.widget_3.setStyleSheet("")
-        self.ui.listWidget.setStyleSheet("")
+        self.ui.scrollArea.setStyleSheet("")
         self.ui.progressBar.setVisible(False)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)

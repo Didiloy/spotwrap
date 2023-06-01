@@ -29,7 +29,7 @@ class SongController(QWidget):
         minutes = int(minutes)
         seconds = int(seconds)
         self.ui.labelDuration.setText(f"{minutes}:{seconds}")
-        self.ui.widget_2.setStyleSheet(f"background-color:white;border:0px;border-radius:10px;")
+        # self.ui.widget_2.setStyleSheet(f"background-color:white;border:0px;border-radius:10px;")
         self.ui.progressBar.setVisible(False)
         pixmap = QPixmap(":/images/images/check.png")
         pixmap.scaledToWidth(16)
