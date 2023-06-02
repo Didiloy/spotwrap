@@ -1,3 +1,4 @@
+altgraph==0.17.3
 anyio==3.7.0
 async-timeout==4.0.2
 beautifulsoup4==4.12.2
@@ -25,6 +26,8 @@ platformdirs==3.5.1
 pycryptodomex==3.18.0
 pydantic==1.10.8
 Pygments==2.15.1
+pyinstaller==5.11.0
+pyinstaller-hooks-contrib==2023.3
 pykakasi==2.2.1
 pyqtdarktheme==2.1.0
 PySide6==6.2.4

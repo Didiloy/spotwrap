@@ -1,6 +1,7 @@
 import requests
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
 
+
 class GetImageSignals(QObject):
     result = Signal(object)
     failed = Signal(object)

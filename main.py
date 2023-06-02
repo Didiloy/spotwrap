@@ -1,8 +1,4 @@
-import os
 import sys
-import threading
-
-import platformdirs
 from PySide6.QtWidgets import QApplication
 from dotenv import load_dotenv
 
@@ -10,7 +6,6 @@ from src.controllers.MainWindowController import MainWindowController
 import qdarktheme
 
 from src.utils.Config import Config
-from src.utils.Spotdl import SpotdlSingleton
 
 # load environment variables
 load_dotenv()

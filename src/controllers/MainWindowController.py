@@ -4,7 +4,6 @@ import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
-from spotdl import Song
 from src.controllers.SongController import SongController
 from src.utils.Colors import Colors
 from src.utils.Config import Config
@@ -37,7 +36,7 @@ class MainWindowController(QWidget):
         self.searchWorker = SearchWorker("")
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
-        self.songs: List[Song] = []
+        self.songs = []
         self.query = ""
         self.ui.progressBar.setVisible(False)
         self.ui.labelCoverAlbum.setStyleSheet("padding-left:10px;")
@@ -191,7 +190,7 @@ class MainWindowController(QWidget):
             Config.get_instance().SAVE_PATH = directory
             Config.get_instance().saveNewSavePath()
 
-    def sortSongs(self, songs: List[Song]):
+    def sortSongs(self, songs):
         return sorted(songs, key=lambda song: song.track_number)
 
     def downloadAll(self):
