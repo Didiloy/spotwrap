@@ -127,6 +127,7 @@ class Ui_MainWindow(object):
         font1.setPointSize(18)
         font1.setBold(True)
         self.labelTitle.setFont(font1)
+        self.labelTitle.setWordWrap(True)
 
         self.horizontalLayout_3.addWidget(self.labelTitle)
 
