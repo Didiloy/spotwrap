@@ -23,6 +23,11 @@ Then you have to install the dependencies using pip
 ```bash 
 pip install -r requirements.txt
 ```
+Some dependencies are not available on pypi, so you have to install them manually:
+```bash
+pip install --use-pep517 git+https://github.com/stschake/savify@feature/use-yt-dlp
+```
+
 Then you have to compile the python file using pyinstaller:
-Screenshot of all the options to use: ![Screenshot](assets/images/how_to_bundle_spotwrap.png)
+Screenshot of all the options to use (use your own paths): ![Screenshot](assets/images/how_to_bundle_spotwrap.png)
 Then you have to add the pip package's `pykakasi` directory to the output directory of auto-py-to-exe for it to work.
