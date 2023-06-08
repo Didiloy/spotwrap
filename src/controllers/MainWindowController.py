@@ -96,8 +96,8 @@ class MainWindowController(QWidget):
             f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
         self.ui.buttonDownloadAll.setStyleSheet(f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
         songs = self.sortSongs(songs)
-        for song in songs:
-            songItem = SongController(song, self.signals)
+        for s in songs:
+            songItem = SongController(s, self.signals)
             songItem.setStyleSheet(
                 f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
             hint = songItem.sizeHint()

@@ -12,6 +12,7 @@ class SongController(QWidget):
     def __init__(self, song: Song, signals):
         super().__init__()
         self.song = song
+        print(self.song)
         self.signals = signals
         self.signals.quality.connect(self.setQuality)
         self.signals.output_type.connect(self.setOutputType)
@@ -24,9 +25,11 @@ class SongController(QWidget):
         artist_name = "/".join(self.song.artists)
         self.ui.labelSongArtists.setText(f"{artist_name}")
         # convert song duration from milliseconds to minutes and seconds
+        if self.song.duration < 1000: # can sometime be in seconds rather than milliseconds
+            self.song.duration = self.song.duration * 1000
         minutes, seconds = divmod(self.song.duration / 1000, 60)
         minutes = int(minutes)
-        seconds = int(seconds)
+        seconds = int(seconds) if seconds > 9 else f"0{int(seconds)}"
         self.ui.labelDuration.setText(f"{minutes}:{seconds}")
         self.ui.progressBar.setVisible(False)
         pixmap = QPixmap(":/images/images/check.png")
