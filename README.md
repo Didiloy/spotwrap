@@ -7,6 +7,11 @@
 ### How to use
 Paste your spotify song/album/playlist link to the search bar, hit enter,
 then you can select the output type and the quality you want. Then simply click on Download.
+### How to download
+You can download the latest release from [the release page](https://github.com/Didiloy/spotwrap/releases).
+Download the executable for your os, then just run it.
+For linux users, you have to have ffmpeg installed on your system !!
+
 ### How to compile using pyinstaller and auto-py-to-exe
 First you have to install the dependencies using pip, I recommend using a virtual environment
 ```bash
