@@ -3,6 +3,7 @@
 ### Gallery
 - Album view : ![Screenshot](assets/readme/image_album.png)
 - Song view : ![Screenshot](assets/readme/image_song.png)
+- Artist view : ![Screenshot](assets/readme/image_artist.png)
 ### How to use
 Paste your spotify song/album/playlist link to the search bar, hit enter,
 then you can select the output type and the quality you want. Then simply click on Download.
