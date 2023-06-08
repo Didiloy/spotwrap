@@ -56,7 +56,7 @@
            <string/>
           </property>
           <property name="placeholderText">
-           <string>Search..</string>
+           <string>Paste your Spotify link..</string>
           </property>
          </widget>
         </item>

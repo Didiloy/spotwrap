@@ -29,6 +29,7 @@ class Config:
             self.SECONDARY_BACKGROUND_COLOR = "rgb(239, 242, 233)"
             logging.basicConfig(filename=f"{self.USER_DATA_PATH}/spotwrap.log", level=logging.DEBUG)
             self.logger = logging.getLogger()
+            print(logging.getLoggerClass().root.handlers[0].baseFilename)
 
             self.TEMP_PATH = tempfile.gettempdir()
         else:

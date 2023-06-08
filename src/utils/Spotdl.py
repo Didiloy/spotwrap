@@ -5,6 +5,7 @@ import sys
 from savify import Savify, Quality
 from savify.utils import PathHolder
 from spotdl import Spotdl
+from yt_dlp.postprocessor import FFmpegPostProcessor
 
 from src.utils.Config import Config
 

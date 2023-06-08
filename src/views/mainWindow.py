@@ -259,7 +259,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"SpotWrap", None))
         self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search..", None))
+        self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Paste your Spotify link..", None))
         self.search.setText("")
         self.labelCoverAlbum.setText("")
         self.labelNbTitle.setText("")

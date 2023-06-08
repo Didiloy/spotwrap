@@ -5,3 +5,4 @@ spotwrap_venv
 **__pycache__**
 .cache
 output
+ffmpeg_win
