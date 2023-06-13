@@ -204,7 +204,7 @@ class MainWindowController(QWidget):
         options |= QFileDialog.Option.DontUseNativeDialog
 
         directory = QFileDialog.getExistingDirectory(
-            self, "Select Directory", dir=Config.get_instance().SAVE_PATH, options=options
+            None, "Select Directory", dir=Config.get_instance().SAVE_PATH, options=options
         )
         if directory == "" or directory is None:
             return
