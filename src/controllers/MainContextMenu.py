@@ -16,8 +16,18 @@
 import os
 import sys
 
+from PySide6 import QtCore
 from PySide6.QtWidgets import QMenu
+
+from src.controllers.AboutController import AboutController
 from src.utils.Config import Config
+
+
+def about():
+    about_window = AboutController()
+    about_window.show()
+    about_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+    about_window.exec_()
 
 
 class MainContextMenu(QMenu):
@@ -29,10 +39,7 @@ class MainContextMenu(QMenu):
         self.menu.addAction("EN", lambda: self.change_locale("en_EN"))
         self.menu.addAction("FR", lambda: self.change_locale("fr_FR"))
         self.addMenu(self.menu)
-        self.addAction("About", self.about)
-
-    def about(self):
-        print("about")
+        self.addAction("About", about)
 
     def change_locale(self, locale):
         Config.get_instance().LOCALE = locale
