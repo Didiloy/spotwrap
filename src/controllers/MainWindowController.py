@@ -1,5 +1,3 @@
-from typing import List
-
 import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
@@ -28,6 +26,7 @@ class MainWindowController(QWidget):
         self.ui.setupUi(self)
         self.ui.buttonDownloadAll.setVisible(False)
         self.ui.buttonPath.setVisible(False)
+        self.ui.progressBarMainWindow.setVisible(False)
         self.ui.search.clicked.connect(self.search)
         # connect the enter key to the search button
         self.ui.lineEdit.returnPressed.connect(self.ui.search.click)
@@ -67,14 +66,16 @@ class MainWindowController(QWidget):
         self.query = self.ui.lineEdit.text()
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
+        self.ui.progressBarMainWindow.setVisible(True)
         self.searchWorker = SearchWorker(self.query)
-        self.searchWorker.signals.failed.connect(self.resetUI())
+        self.searchWorker.signals.failed.connect(self.resetUI)
         self.searchWorker.signals.result.connect(self.updateUI)
         # Execute
         self.threadpool.start(self.searchWorker)
 
     def updateUI(self, songs):
         self.ui.lineEdit.setText("")
+        self.ui.progressBarMainWindow.setVisible(False)
         self.songs = songs
         song = songs[0]
         self.ui.labelTitle.setText(song.album_name)
@@ -176,6 +177,7 @@ class MainWindowController(QWidget):
         self.ui.labelDownloadFinished.setVisible(False)
         self.ui.comboBoxQuality.setVisible(False)
         self.ui.comboBoxOutPutType.setVisible(False)
+        self.ui.progressBarMainWindow.setVisible(False)
 
     def select_directory(self):
         options = QFileDialog.Options()

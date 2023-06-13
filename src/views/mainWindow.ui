@@ -30,6 +30,31 @@
       <enum>QLayout::SetMaximumSize</enum>
      </property>
      <item>
+      <widget class="QProgressBar" name="progressBarMainWindow">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>5</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>0</number>
+       </property>
+       <property name="value">
+        <number>-1</number>
+       </property>
+       <property name="textVisible">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QWidget" name="widget" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -167,7 +192,6 @@
                    <property name="font">
                     <font>
                      <pointsize>18</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -348,8 +372,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>779</width>
-             <height>324</height>
+             <width>767</width>
+             <height>295</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">

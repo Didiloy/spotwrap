@@ -12,7 +12,6 @@ class SongController(QWidget):
     def __init__(self, song: Song, signals):
         super().__init__()
         self.song = song
-        print(self.song)
         self.signals = signals
         self.signals.quality.connect(self.setQuality)
         self.signals.output_type.connect(self.setOutputType)
