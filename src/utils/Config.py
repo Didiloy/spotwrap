@@ -27,17 +27,29 @@ class Config:
                 self.SAVE_PATH = f.read()
 
             self.SECONDARY_BACKGROUND_COLOR = "rgb(239, 242, 233)"
+
             logging.basicConfig(filename=f"{self.USER_DATA_PATH}/spotwrap.log", level=logging.DEBUG)
             self.logger = logging.getLogger()
             # print(logging.getLoggerClass().root.handlers[0].baseFilename)
 
             self.TEMP_PATH = tempfile.gettempdir()
+
+            self.LOCALE_PATH = os.path.join(self.USER_DATA_PATH, "locale.txt")
+            if not os.path.exists(self.LOCALE_PATH):
+                with open(self.LOCALE_PATH, "w") as f:
+                    f.write("en_EN")
+            with open(self.LOCALE_PATH, "r") as f:
+                self.LOCALE = f.read()
         else:
             raise Exception("You cannot create another Config class")
 
     def saveNewSavePath(self):
         with open(self.SAVE_PATH_FILE, "w") as f:
             f.write(self.SAVE_PATH)
+
+    def saveLocale(self):
+        with open(self.LOCALE_PATH, "w") as f:
+            f.write(self.LOCALE)
 
     @staticmethod
     def get_instance():

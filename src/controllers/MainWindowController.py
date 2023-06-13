@@ -1,7 +1,9 @@
 import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
-from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog
+from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog, QMenu
+
+from src.controllers.MainContextMenu import MainContextMenu
 from src.controllers.SongController import SongController
 from src.utils.Colors import Colors
 from src.utils.Config import Config
@@ -27,6 +29,9 @@ class MainWindowController(QWidget):
         self.ui.buttonDownloadAll.setVisible(False)
         self.ui.buttonPath.setVisible(False)
         self.ui.progressBarMainWindow.setVisible(False)
+        mainContextMenu = MainContextMenu()
+        self.ui.menuButton.setMenu(mainContextMenu)
+        self.ui.menuButton.menu()
         self.ui.search.clicked.connect(self.search)
         # connect the enter key to the search button
         self.ui.lineEdit.returnPressed.connect(self.ui.search.click)

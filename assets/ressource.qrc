@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/menu.png</file>
     <file>images/download_icon.png</file>
     <file>images/folder.png</file>
     <file>images/cross.png</file>
@@ -7,5 +8,9 @@
     <file>images/loader.gif</file>
     <file>images/search.png</file>
     <file>images/check.png</file>
+  </qresource>
+  <qresource prefix="translations">
+    <file>translations/fr_FR.qm</file>
+    <file>translations/en_EN.qm</file>
   </qresource>
 </RCC>
