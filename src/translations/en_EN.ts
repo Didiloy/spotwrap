@@ -9,12 +9,12 @@
         <translation type="unfinished">SpotWrap</translation>
     </message>
     <message>
-        <location filename="../views/mainWindow.ui" line="84"/>
+        <location filename="../views/mainWindow.ui" line="62"/>
         <source>Paste your Spotify link..</source>
         <translation type="unfinished">Paste your Spotify link..</translation>
     </message>
     <message>
-        <location filename="../views/mainWindow.ui" line="349"/>
+        <location filename="../views/mainWindow.ui" line="327"/>
         <source>Tout télécharger</source>
         <translation type="unfinished">Download all</translation>
     </message>
