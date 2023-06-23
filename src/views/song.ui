@@ -144,7 +144,6 @@
            <property name="font">
             <font>
              <pointsize>12</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -224,6 +223,12 @@
          </sizepolicy>
         </property>
         <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>10</height>
+         </size>
+        </property>
+        <property name="maximumSize">
          <size>
           <width>90</width>
           <height>10</height>

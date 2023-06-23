@@ -152,6 +152,7 @@ class Ui_song(object):
         sizePolicy3.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
         self.progressBar.setSizePolicy(sizePolicy3)
         self.progressBar.setMinimumSize(QSize(90, 10))
+        self.progressBar.setMaximumSize(QSize(90, 10))
         self.progressBar.setMaximum(0)
         self.progressBar.setValue(-1)
 
