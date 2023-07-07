@@ -29,11 +29,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-Some dependencies are not available on pypi, so you have to install them manually before installing the other:
-```bash
-pip install --use-pep517 git+https://github.com/stschake/savify@feature/use-yt-dlp
-```
-Then you have to install the dependencies using pip
+You have to install the dependencies using pip
 ```bash 
 pip install -r requirements.txt
 ```

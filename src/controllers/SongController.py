@@ -30,8 +30,8 @@ class SongController(QWidget):
         self.signals = signals
         self.signals.quality.connect(self.setQuality)
         self.signals.output_type.connect(self.setOutputType)
-        self.quality = "BEST"
-        self.output_type = "MP3"
+        self.quality = "192k"
+        self.output_type = "mp3"
         self.ui = Ui_song()
         self.ui.setupUi(self)
         self.ui.labelTrackNumber.setText(f"{self.song.track_number}")
@@ -53,7 +53,7 @@ class SongController(QWidget):
         self.ui.buttonDownload.clicked.connect(self.downloadSong)
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
-        self.query = f"{self.song.name} artist:{self.song.artist} album:{self.song.album_name}"
+        self.query = self.song.url
         self.getImageWorker = GetImageWorker(self.song.cover_url)
         # self.getAndSetImageFromUrl(self.song.cover_url)
         self.getImageWorker.signals.result.connect(self.setImage)
@@ -69,8 +69,7 @@ class SongController(QWidget):
         self.ui.buttonDownload.setDisabled(True)
         self.ui.progressBar.setVisible(True)
         self.ui.labelDownloadFinished.setVisible(False)
-        self.downloadAllWorker = DownloadAllWorker(self.query, quality=self.quality, output_format=self.output_type,
-                                                   search_type="TRACK")
+        self.downloadAllWorker = DownloadAllWorker(self.query, quality=self.quality, output_format=self.output_type)
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
         # Execute

@@ -13,6 +13,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import asyncio
 import sys
 
 from PySide6.QtCore import QTranslator, QCoreApplication
@@ -21,16 +22,14 @@ from dotenv import load_dotenv
 
 from src.controllers.MainWindowController import MainWindowController
 import qdarktheme
-
 from src.utils.Config import Config
 import assets.ressource
 
-# load environment variables
-load_dotenv()
-config = Config.get_instance()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    load_dotenv()
+    config = Config.get_instance()
     translator = QTranslator()
     translator.load(f':/translations/translations/{config.LOCALE}.qm')  # Path to the compiled .qm file
     QCoreApplication.installTranslator(translator)

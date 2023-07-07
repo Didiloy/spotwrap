@@ -13,12 +13,12 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import subprocess
+import time
+
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
-from savify import Savify, Type, Quality, Format
-from savify.utils import PathHolder
 
 from src.utils.Config import Config
-from src.utils.Spotdl import SpotdlSingleton
 
 
 class WorkerSignals(QObject):
@@ -28,74 +28,32 @@ class WorkerSignals(QObject):
 
 class DownloadAllWorker(QRunnable):
 
-    def __init__(self, query, quality, output_format, search_type, *args, **kwargs):
+    def __init__(self, query, quality, output_format, *args, **kwargs):
         super(DownloadAllWorker, self).__init__()
-        # Store constructor arguments (re-used for processing)
         self.query = query
-        self.quality = self.convertStringToQuality(quality)
-        self.output_format = self.convertOutputTypeToFormat(output_format)
-        self.search_type = self.convertStringToType(search_type)
+        self.quality = quality
+        self.output_format = output_format
         self.args = args
         self.kwargs = kwargs
         self.signals = WorkerSignals()
+        self.command = [
+            "spotdl",
+            f"{self.query}",
+            "--bitrate",
+            f"{self.quality}",
+            "--format",
+            f"{self.output_format}",
+            "--output",
+            Config.get_instance().SAVE_PATH
+        ]
 
     @Slot()  # QtCore.Slot
     def run(self):
-        savify: Savify = SpotdlSingleton.get_instance().savify
-        savify.path_holder = PathHolder(downloads_path=Config.get_instance().SAVE_PATH)
-
-        savify.quality = self.quality
-        savify.download_format = self.output_format
         try:
-            savify.download(self.query, query_type=self.search_type)
+            p = subprocess.Popen(self.command)
+            while p.poll() is None:
+                time.sleep(0.5)
             self.signals.result.emit("Done")  # Return the result of the processing
-        except:
+        except Exception as e:
+            print(e)
             self.signals.failed.emit("Failed")  # Return the result of the processing
-
-    def convertStringToQuality(self, quality: str) -> Quality:
-        if quality == "WORST":
-            return Quality.WORST
-        elif quality == "Q32K":
-            return Quality.Q32K
-        elif quality == "Q96K":
-            return Quality.Q96K
-        elif quality == "Q128K":
-            return Quality.Q128K
-        elif quality == "Q192K":
-            return Quality.Q192K
-        elif quality == "Q256K":
-            return Quality.Q256K
-        elif quality == "Q320K":
-            return Quality.Q320K
-        elif quality == "BEST":
-            return Quality.BEST
-        else:
-            return Quality.Q192K
-
-    def convertOutputTypeToFormat(self, output: str) -> Format:
-        if output == "MP3":
-            return Format.MP3
-        elif output == "AAC":
-            return Format.AAC
-        elif output == "FLAC":
-            return Format.FLAC
-        elif output == "M4A":
-            return Format.M4A
-        elif output == "OPUS":
-            return Format.OPUS
-        elif output == "VORBIS":
-            return Format.VORBIS
-        elif output == "WAV":
-            return Format.WAV
-        else:
-            return Format.MP3
-
-    def convertStringToType(self, type: str) -> Type:
-        if type == "ALBUM":
-            return Type.ALBUM
-        elif type == "PLAYLIST":
-            return Type.PLAYLIST
-        elif type == "TRACK":
-            return Type.TRACK
-        else:
-            return Type.ALBUM

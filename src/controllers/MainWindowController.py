@@ -13,10 +13,12 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
 from PySide6.QtGui import QPixmap, QColor, QPainter, QBrush
 from PySide6.QtWidgets import QWidget, QListWidgetItem, QFileDialog, QMenu
+from spotdl import Song
 
 from src.controllers.MainContextMenu import MainContextMenu
 from src.controllers.SongController import SongController
@@ -33,11 +35,12 @@ class MainWindowSignals(QObject):
 
 
 class MainWindowController(QWidget):
-    QUALITY = ["192K", "WORST", "32K", "96K", "128K", "256K", "320K", "BEST"]
-    OUTPUT_FORMAT = ["MP3", "AAC", "FLAC", "M4A", "OPUS", "VORBIS", "WAV"]
+    QUALITY = ["192K", "8k", "16k", "32k", "96k", "128k", "160k", "256k", "320k"]
+    OUTPUT_FORMAT = ["mp3", "flac", "m4a", "opus", "ogg"]
 
     def __init__(self):
         super().__init__()
+        self.task = None
         self.signals = MainWindowSignals()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -96,7 +99,7 @@ class MainWindowController(QWidget):
     def updateUI(self, songs):
         self.ui.lineEdit.setText("")
         self.ui.progressBarMainWindow.setVisible(False)
-        self.songs = songs
+        self.songs: [Song] = songs
         song = songs[0]
         self.ui.labelTitle.setText(song.album_name)
         self.ui.labelArtistName.setText(song.artist)
@@ -115,7 +118,8 @@ class MainWindowController(QWidget):
             f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
         self.ui.scrollArea.setStyleSheet(
             f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
-        self.ui.buttonDownloadAll.setStyleSheet(f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
+        self.ui.buttonDownloadAll.setStyleSheet(
+            f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
         songs = self.sortSongs(songs)
         for s in songs:
             songItem = SongController(s, self.signals)
@@ -127,9 +131,6 @@ class MainWindowController(QWidget):
             item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
-
-
-
 
     def getAndSetImageFromUrl(self, imageURL):
         request = requests.get(imageURL, stream=True)
@@ -174,8 +175,6 @@ class MainWindowController(QWidget):
             self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
             self.materialYouOnColorOnPrimary = Colors.get_instance().ON_SECONDARY_BACKGROUND_COLOR
 
-
-
     def resetUI(self):
         self.songs = []
         self.ui.labelTitle.setText("")
@@ -216,27 +215,24 @@ class MainWindowController(QWidget):
         return sorted(songs, key=lambda song: song.track_number)
 
     def downloadAll(self):
-        if self.songs == []:
+        if not self.songs:
             return
+        print("start downloadAll")
         self.ui.labelDownloadFinished.setVisible(False)
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
         self.ui.progressBar.setVisible(True)
         quality = self.ui.comboBoxQuality.currentText()
-        if "WORST" or "BEST" not in quality:
-            quality = "Q" + quality
         output_format = self.ui.comboBoxOutPutType.currentText()
-        if "open.spotify" and "playlist" in self.query:
-            download_type = "PLAYLIST"
-        else:
-            download_type = "ALBUM"
-        self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format, download_type)
+        self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format)
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
         # Execute
         self.threadpool.start(self.downloadAllWorker)
+        print("stop ")
 
-    def downloadFinished(self):
+    def downloadFinished(self, msg):
+        print("download finished: ", msg)
         pixmap = QPixmap(":/images/images/check.png")
         pixmap = pixmap.scaledToWidth(25)
         self.ui.labelDownloadFinished.setPixmap(pixmap)
