@@ -4,25 +4,36 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../views/mainWindow.ui" line="20"/>
+        <location filename="mainWindow.ui" line="20"/>
         <source>SpotWrap</source>
-        <translation type="unfinished">SpotWrap</translation>
+        <translation>SpotWrap</translation>
     </message>
     <message>
-        <location filename="../views/mainWindow.ui" line="84"/>
-        <source>Paste your Spotify link..</source>
-        <translation type="unfinished">Copiez votre lien Spotify..</translation>
+        <location filename="mainWindow.ui" line="37"/>
+        <source>Recherche</source>
+        <translation>Recherche</translation>
     </message>
     <message>
-        <location filename="../views/mainWindow.ui" line="349"/>
+        <location filename="mainWindow.ui" line="160"/>
+        <source>Collez votre lien Spotify...</source>
+        <oldsource>Paste your Spotify link..</oldsource>
+        <translation>Collez votre lien Spotify...</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="428"/>
         <source>Tout télécharger</source>
-        <translation type="unfinished">Tout télécharger</translation>
+        <translation>Tout télécharger</translation>
+    </message>
+    <message>
+        <location filename="mainWindow.ui" line="516"/>
+        <source>Progès</source>
+        <translation>Progès</translation>
     </message>
 </context>
 <context>
     <name>song</name>
     <message>
-        <location filename="../views/song.ui" line="26"/>
+        <location filename="song.ui" line="26"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>

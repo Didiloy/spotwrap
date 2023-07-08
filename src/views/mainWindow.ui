@@ -157,7 +157,7 @@
                <string/>
               </property>
               <property name="placeholderText">
-               <string>Paste your Spotify link..</string>
+               <string>Collez votre lien Spotify...</string>
               </property>
              </widget>
             </item>
@@ -513,7 +513,7 @@
      </widget>
      <widget class="QWidget" name="progressTab">
       <attribute name="title">
-       <string>Progès</string>
+       <string>Progrès</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">

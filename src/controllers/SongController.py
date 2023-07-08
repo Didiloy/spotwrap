@@ -82,7 +82,6 @@ class SongController(QWidget):
         self.threadpool.start(self.downloadAllWorker)
 
     def emitProgress(self, progress):
-        print("song emit")
         self.songSignals.progress.emit(progress)
 
     def updateUi(self):

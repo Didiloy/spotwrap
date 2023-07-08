@@ -345,7 +345,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"SpotWrap", None))
         self.menuButton.setText("")
         self.lineEdit.setText("")
-        self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Paste your Spotify link..", None))
+        self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Collez votre lien Spotify...", None))
         self.search.setText("")
         self.labelCoverAlbum.setText("")
         self.labelNbTitle.setText("")
@@ -358,6 +358,6 @@ class Ui_MainWindow(object):
         self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
         self.labelBigIcon.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.searchTab), QCoreApplication.translate("MainWindow", u"Recherche", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.progressTab), QCoreApplication.translate("MainWindow", u"Prog\u00e8s", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.progressTab), QCoreApplication.translate("MainWindow", u"Progr\u00e8s", None))
     # retranslateUi
 
