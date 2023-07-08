@@ -13,7 +13,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-from PySide6.QtCore import QThreadPool, Signal, Qt
+from PySide6.QtCore import QThreadPool, Signal, Qt, QObject
 from PySide6.QtGui import QPainter, QColor, QPaintEvent, QPixmap, QBrush
 from PySide6.QtWidgets import QWidget
 from spotdl import Song
@@ -23,9 +23,14 @@ from src.utils.GetImageWorker import GetImageWorker
 from src.views.song import Ui_song
 
 
+class SongSignals(QObject):
+    progress = Signal(object)
+
+
 class SongController(QWidget):
     def __init__(self, song: Song, signals):
         super().__init__()
+        self.songSignals = SongSignals()
         self.song = song
         self.signals = signals
         self.signals.quality.connect(self.setQuality)
@@ -39,7 +44,7 @@ class SongController(QWidget):
         artist_name = "/".join(self.song.artists)
         self.ui.labelSongArtists.setText(f"{artist_name}")
         # convert song duration from milliseconds to minutes and seconds
-        if self.song.duration < 1000: # can sometime be in seconds rather than milliseconds
+        if self.song.duration < 1000:  # can sometime be in seconds rather than milliseconds
             self.song.duration = self.song.duration * 1000
         minutes, seconds = divmod(self.song.duration / 1000, 60)
         minutes = int(minutes)
@@ -72,8 +77,13 @@ class SongController(QWidget):
         self.downloadAllWorker = DownloadAllWorker(self.query, quality=self.quality, output_format=self.output_type)
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
+        self.downloadAllWorker.signals.progress.connect(self.emitProgress)
         # Execute
         self.threadpool.start(self.downloadAllWorker)
+
+    def emitProgress(self, progress):
+        print("song emit")
+        self.songSignals.progress.emit(progress)
 
     def updateUi(self):
         self.ui.buttonDownload.setDisabled(False)

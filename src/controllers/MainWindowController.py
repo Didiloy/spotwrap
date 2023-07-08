@@ -99,6 +99,7 @@ class MainWindowController(QWidget):
     def updateUI(self, songs):
         self.ui.lineEdit.setText("")
         self.ui.progressBarMainWindow.setVisible(False)
+        self.ui.labelBigIcon.setVisible(False)
         self.songs: [Song] = songs
         song = songs[0]
         self.ui.labelTitle.setText(song.album_name)
@@ -131,6 +132,7 @@ class MainWindowController(QWidget):
             item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
+            songItem.songSignals.progress.connect(self.progress)
 
     def getAndSetImageFromUrl(self, imageURL):
         request = requests.get(imageURL, stream=True)
@@ -197,6 +199,8 @@ class MainWindowController(QWidget):
         self.ui.comboBoxQuality.setVisible(False)
         self.ui.comboBoxOutPutType.setVisible(False)
         self.ui.progressBarMainWindow.setVisible(False)
+        self.ui.labelBigIcon.setVisible(True)
+        self.ui.textEditDownloadProgress.setText("")
 
     def select_directory(self):
         options = QFileDialog.Options()
@@ -217,7 +221,6 @@ class MainWindowController(QWidget):
     def downloadAll(self):
         if not self.songs:
             return
-        print("start downloadAll")
         self.ui.labelDownloadFinished.setVisible(False)
         self.ui.lineEdit.setDisabled(True)
         self.ui.search.setDisabled(True)
@@ -227,9 +230,12 @@ class MainWindowController(QWidget):
         self.downloadAllWorker = DownloadAllWorker(self.query, quality, output_format)
         self.downloadAllWorker.signals.result.connect(self.downloadFinished)
         self.downloadAllWorker.signals.failed.connect(self.downloadFailed)
+        self.downloadAllWorker.signals.progress.connect(self.progress)
         # Execute
         self.threadpool.start(self.downloadAllWorker)
-        print("stop ")
+
+    def progress(self, progress):
+        self.ui.textEditDownloadProgress.append(progress)
 
     def downloadFinished(self, msg):
         print("download finished: ", msg)

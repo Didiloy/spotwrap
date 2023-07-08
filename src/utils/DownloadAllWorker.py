@@ -24,6 +24,7 @@ from src.utils.Config import Config
 class WorkerSignals(QObject):
     result = Signal(object)
     failed = Signal(object)
+    progress = Signal(object)
 
 
 class DownloadAllWorker(QRunnable):
@@ -50,9 +51,11 @@ class DownloadAllWorker(QRunnable):
     @Slot()  # QtCore.Slot
     def run(self):
         try:
-            p = subprocess.Popen(self.command)
-            while p.poll() is None:
-                time.sleep(0.5)
+            # p = subprocess.Popen(self.command, stdout=subprocess.PIPE, bufsize=1)
+            with subprocess.Popen(self.command, stdout=subprocess.PIPE, bufsize=1,
+                                  universal_newlines=True) as p:
+                for line in p.stdout:
+                    self.signals.progress.emit(line)
             self.signals.result.emit("Done")  # Return the result of the processing
         except Exception as e:
             print(e)

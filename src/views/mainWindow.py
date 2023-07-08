@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.5.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
     QHBoxLayout, QLabel, QLayout, QLineEdit,
     QListView, QListWidget, QListWidgetItem, QProgressBar,
     QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
 import assets.ressource
 
 class Ui_MainWindow(object):
@@ -38,16 +38,68 @@ class Ui_MainWindow(object):
         self.gridLayout = QGridLayout(MainWindow)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.tabWidget = QTabWidget(MainWindow)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.searchTab = QWidget()
+        self.searchTab.setObjectName(u"searchTab")
+        self.gridLayout_6 = QGridLayout(self.searchTab)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.gridLayout_5 = QGridLayout()
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.widget_6 = QWidget(self.searchTab)
+        self.widget_6.setObjectName(u"widget_6")
+        self.widget_6.setLayoutDirection(Qt.LeftToRight)
+        self.horizontalLayout_4 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_4.setSpacing(5)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.progressBarMainWindow = QProgressBar(self.widget_6)
+        self.progressBarMainWindow.setObjectName(u"progressBarMainWindow")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.progressBarMainWindow.sizePolicy().hasHeightForWidth())
+        self.progressBarMainWindow.setSizePolicy(sizePolicy1)
+        self.progressBarMainWindow.setMaximumSize(QSize(16777215, 5))
+        self.progressBarMainWindow.setMaximum(0)
+        self.progressBarMainWindow.setValue(-1)
+        self.progressBarMainWindow.setTextVisible(True)
+
+        self.horizontalLayout_4.addWidget(self.progressBarMainWindow)
+
+        self.menuButton = QPushButton(self.widget_6)
+        self.menuButton.setObjectName(u"menuButton")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.menuButton.sizePolicy().hasHeightForWidth())
+        self.menuButton.setSizePolicy(sizePolicy2)
+        self.menuButton.setMaximumSize(QSize(25, 25))
+        self.menuButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon1 = QIcon()
+        icon1.addFile(u":/images/images/menu.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuButton.setIcon(icon1)
+        self.menuButton.setIconSize(QSize(15, 15))
+        self.menuButton.setFlat(True)
+
+        self.horizontalLayout_4.addWidget(self.menuButton, 0, Qt.AlignRight)
+
+
+        self.gridLayout_5.addWidget(self.widget_6, 0, 0, 1, 1)
+
+
+        self.gridLayout_6.addLayout(self.gridLayout_5, 0, 0, 1, 1)
+
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setSizeConstraint(QLayout.SetMaximumSize)
-        self.widget = QWidget(MainWindow)
+        self.widget = QWidget(self.searchTab)
         self.widget.setObjectName(u"widget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
-        self.widget.setSizePolicy(sizePolicy1)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
+        self.widget.setSizePolicy(sizePolicy3)
         self.widget.setMinimumSize(QSize(0, 50))
         self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setSpacing(6)
@@ -60,15 +112,12 @@ class Ui_MainWindow(object):
 
         self.search = QPushButton(self.widget)
         self.search.setObjectName(u"search")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.search.sizePolicy().hasHeightForWidth())
         self.search.setSizePolicy(sizePolicy2)
         self.search.setMinimumSize(QSize(50, 0))
-        icon1 = QIcon()
-        icon1.addFile(u":/images/images/search.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.search.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/images/images/search.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.search.setIcon(icon2)
         self.search.setCheckable(False)
 
         self.horizontalLayout.addWidget(self.search, 0, Qt.AlignRight)
@@ -76,7 +125,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.widget)
 
-        self.widget_2 = QWidget(MainWindow)
+        self.widget_2 = QWidget(self.searchTab)
         self.widget_2.setObjectName(u"widget_2")
         self.verticalLayout_2 = QVBoxLayout(self.widget_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -101,11 +150,11 @@ class Ui_MainWindow(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.labelNbTitle = QLabel(self.awidget_4)
         self.labelNbTitle.setObjectName(u"labelNbTitle")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.labelNbTitle.sizePolicy().hasHeightForWidth())
-        self.labelNbTitle.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.labelNbTitle.sizePolicy().hasHeightForWidth())
+        self.labelNbTitle.setSizePolicy(sizePolicy4)
         font = QFont()
         font.setItalic(True)
         self.labelNbTitle.setFont(font)
@@ -119,11 +168,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, -1)
         self.labelTitle = QLabel(self.widget_5)
         self.labelTitle.setObjectName(u"labelTitle")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
-        self.labelTitle.setSizePolicy(sizePolicy4)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.labelTitle.sizePolicy().hasHeightForWidth())
+        self.labelTitle.setSizePolicy(sizePolicy5)
         font1 = QFont()
         font1.setPointSize(18)
         font1.setBold(True)
@@ -162,18 +211,18 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, -1, -1)
         self.labelArtistName = QLabel(self.widget_4)
         self.labelArtistName.setObjectName(u"labelArtistName")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
-        self.labelArtistName.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.labelArtistName.sizePolicy().hasHeightForWidth())
+        self.labelArtistName.setSizePolicy(sizePolicy6)
 
         self.horizontalLayout_2.addWidget(self.labelArtistName)
 
         self.labelSeparator = QLabel(self.widget_4)
         self.labelSeparator.setObjectName(u"labelSeparator")
-        sizePolicy5.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
-        self.labelSeparator.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.labelSeparator.sizePolicy().hasHeightForWidth())
+        self.labelSeparator.setSizePolicy(sizePolicy6)
 
         self.horizontalLayout_2.addWidget(self.labelSeparator)
 
@@ -189,6 +238,7 @@ class Ui_MainWindow(object):
         self.comboBoxOutPutType = QComboBox(self.widget_4)
         self.comboBoxOutPutType.setObjectName(u"comboBoxOutPutType")
         self.comboBoxOutPutType.setCursor(QCursor(Qt.PointingHandCursor))
+        self.comboBoxOutPutType.setSizeAdjustPolicy(QComboBox.AdjustToContents)
 
         self.horizontalLayout_2.addWidget(self.comboBoxOutPutType)
 
@@ -201,9 +251,9 @@ class Ui_MainWindow(object):
         self.buttonPath = QPushButton(self.widget_4)
         self.buttonPath.setObjectName(u"buttonPath")
         self.buttonPath.setCursor(QCursor(Qt.PointingHandCursor))
-        icon2 = QIcon()
-        icon2.addFile(u":/images/images/folder.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.buttonPath.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/images/images/folder.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.buttonPath.setIcon(icon3)
 
         self.horizontalLayout_2.addWidget(self.buttonPath)
 
@@ -223,13 +273,24 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.widget_3)
 
+        self.labelBigIcon = QLabel(self.widget_2)
+        self.labelBigIcon.setObjectName(u"labelBigIcon")
+        sizePolicy2.setHeightForWidth(self.labelBigIcon.sizePolicy().hasHeightForWidth())
+        self.labelBigIcon.setSizePolicy(sizePolicy2)
+        self.labelBigIcon.setMaximumSize(QSize(200, 200))
+        self.labelBigIcon.setPixmap(QPixmap(u":/images/images/download_icon.png"))
+        self.labelBigIcon.setScaledContents(True)
+        self.labelBigIcon.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.labelBigIcon, 0, Qt.AlignHCenter|Qt.AlignVCenter)
+
         self.scrollArea = QScrollArea(self.widget_2)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setFrameShape(QFrame.NoFrame)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 767, 283))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 731, 86))
         self.gridLayout_3 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.listWidget = QListWidget(self.scrollAreaWidgetContents)
@@ -249,54 +310,40 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.widget_2)
 
 
-        self.gridLayout.addLayout(self.verticalLayout, 2, 0, 1, 1)
+        self.gridLayout_6.addLayout(self.verticalLayout, 1, 0, 1, 1)
 
-        self.widget_6 = QWidget(MainWindow)
-        self.widget_6.setObjectName(u"widget_6")
-        self.widget_6.setLayoutDirection(Qt.LeftToRight)
-        self.horizontalLayout_4 = QHBoxLayout(self.widget_6)
-        self.horizontalLayout_4.setSpacing(5)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.progressBarMainWindow = QProgressBar(self.widget_6)
-        self.progressBarMainWindow.setObjectName(u"progressBarMainWindow")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.progressBarMainWindow.sizePolicy().hasHeightForWidth())
-        self.progressBarMainWindow.setSizePolicy(sizePolicy6)
-        self.progressBarMainWindow.setMaximumSize(QSize(16777215, 5))
-        self.progressBarMainWindow.setMaximum(0)
-        self.progressBarMainWindow.setValue(-1)
-        self.progressBarMainWindow.setTextVisible(True)
+        self.tabWidget.addTab(self.searchTab, "")
+        self.progressTab = QWidget()
+        self.progressTab.setObjectName(u"progressTab")
+        self.gridLayout_8 = QGridLayout(self.progressTab)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.gridLayout_7 = QGridLayout()
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.textEditDownloadProgress = QTextEdit(self.progressTab)
+        self.textEditDownloadProgress.setObjectName(u"textEditDownloadProgress")
+        self.textEditDownloadProgress.setReadOnly(True)
 
-        self.horizontalLayout_4.addWidget(self.progressBarMainWindow)
-
-        self.menuButton = QPushButton(self.widget_6)
-        self.menuButton.setObjectName(u"menuButton")
-        sizePolicy2.setHeightForWidth(self.menuButton.sizePolicy().hasHeightForWidth())
-        self.menuButton.setSizePolicy(sizePolicy2)
-        self.menuButton.setMaximumSize(QSize(25, 25))
-        self.menuButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon3 = QIcon()
-        icon3.addFile(u":/images/images/menu.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuButton.setIcon(icon3)
-        self.menuButton.setIconSize(QSize(15, 15))
-        self.menuButton.setFlat(True)
-
-        self.horizontalLayout_4.addWidget(self.menuButton, 0, Qt.AlignRight)
+        self.gridLayout_7.addWidget(self.textEditDownloadProgress, 0, 0, 1, 1)
 
 
-        self.gridLayout.addWidget(self.widget_6, 1, 0, 1, 1)
+        self.gridLayout_8.addLayout(self.gridLayout_7, 0, 0, 1, 1)
+
+        self.tabWidget.addTab(self.progressTab, "")
+
+        self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
 
         self.retranslateUi(MainWindow)
+
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"SpotWrap", None))
+        self.menuButton.setText("")
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Paste your Spotify link..", None))
         self.search.setText("")
@@ -309,6 +356,8 @@ class Ui_MainWindow(object):
         self.labelDate.setText("")
         self.buttonPath.setText("")
         self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
-        self.menuButton.setText("")
+        self.labelBigIcon.setText("")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.searchTab), QCoreApplication.translate("MainWindow", u"Recherche", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.progressTab), QCoreApplication.translate("MainWindow", u"Prog\u00e8s", None))
     # retranslateUi
 
