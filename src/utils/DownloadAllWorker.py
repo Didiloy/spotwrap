@@ -13,8 +13,9 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import os
 import subprocess
-import time
+import sys
 
 from PySide6.QtCore import Signal, QRunnable, Slot, QObject
 
@@ -38,7 +39,7 @@ class DownloadAllWorker(QRunnable):
         self.kwargs = kwargs
         self.signals = WorkerSignals()
         self.command = [
-            "spotdl",
+            self.resource_path("bin/spotdl"),
             f"{self.query}",
             "--bitrate",
             f"{self.quality}",
@@ -51,12 +52,23 @@ class DownloadAllWorker(QRunnable):
     @Slot()  # QtCore.Slot
     def run(self):
         try:
-            # p = subprocess.Popen(self.command, stdout=subprocess.PIPE, bufsize=1)
             with subprocess.Popen(self.command, stdout=subprocess.PIPE, bufsize=1,
                                   universal_newlines=True) as p:
                 for line in p.stdout:
                     self.signals.progress.emit(line)
+            self.signals.progress.emit("Done")
             self.signals.result.emit("Done")  # Return the result of the processing
         except Exception as e:
             print(e)
+            Config.get_instance().logger.error(e)
             self.signals.failed.emit("Failed")  # Return the result of the processing
+
+    def resource_path(self, relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)

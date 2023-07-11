@@ -79,7 +79,7 @@
   },
   {
    "optionDest": "pathex",
-   "value": "/home/dylan/T\u00e9l\u00e9chargements/projets/spotwrap/spotwrap_venv/lib/python3.8/site-packages"
+   "value": "/home/dylan/T\u00e9l\u00e9chargements/projets/spotwrap/spotwrap_venv/lib/python3.11/site-packages"
   },
   {
    "optionDest": "hiddenimports",
@@ -120,6 +120,26 @@
   {
    "optionDest": "collect_all",
    "value": "pykakasi"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "ipaddress"
+  },
+  {
+   "optionDest": "collect_all",
+   "value": "ipaddress"
+  },
+  {
+   "optionDest": "collect_submodules",
+   "value": "ipaddress"
+  },
+  {
+   "optionDest": "collect_data",
+   "value": "ipaddress"
+  },
+  {
+   "optionDest": "binaries",
+   "value": "/home/dylan/T\u00e9l\u00e9chargements/projets/spotwrap/bin/spotdl:./bin"
   }
  ],
  "nonPyinstallerOptions": {

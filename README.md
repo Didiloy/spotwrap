@@ -34,6 +34,8 @@ You have to install the dependencies using pip
 pip install -r requirements.txt
 ```
 
+After that you need to compile spotdl for your system using pyinstaller.
+You can find a config file for pyinstaller in the ``pyinstaller`` folder.
 
 Then you have to compile the python file using pyinstaller:
 Here is a screenshot with all the options to use in auto-py-to-exe: ![Screenshot](assets/images/how_to_bundle_spotwrap.png)
@@ -43,6 +45,7 @@ Or if you want to use pyinstaller here is command on linux (use your own paths):
 ```bash
 pyinstaller --noconfirm --onefile --windowed --icon "/home/dylan/Téléchargements/projets/spotwrap/assets/images/download_icon.png" --name "SpotWrap" --paths "/home/dylan/Téléchargements/projets/spotwrap/spotwrap_venv/lib/python3.8/site-packages" --paths "/home/dylan/Téléchargements/projets/spotwrap/spotwrap_venv/bin" --hidden-import "src" --hidden-import "src.utils" --hidden-import "src.controllers" --hidden-import "spotdl" --hidden-import "importlib._bootstrap" --hidden-import "pykakasi" --collect-submodules "spotdl" --collect-submodules "pykakasi" --collect-all "ytmusicapi" --collect-all "pykakasi"  "/home/dylan/Téléchargements/projets/spotwrap/main.py"
 ```
+or use the config file in ``pyinstaller/config_linux.json``
 - For Windows: you also have to bundle ffmpeg for the application to work (it's the add-binary section). 
 Download ffmpeg binaries for your os from [Here](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z). 
 Create a new directory named 'ffmpeg_win' in repository root directory. Copy three files 'ffmpeg.exe', 'ffprobe.exe', 'ffplay.exe' from downloaded archive to just created 'ffmpeg_win' directory.  

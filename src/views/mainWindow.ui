@@ -523,6 +523,9 @@
            <property name="readOnly">
             <bool>true</bool>
            </property>
+           <property name="placeholderText">
+            <string>No current download</string>
+           </property>
           </widget>
          </item>
         </layout>

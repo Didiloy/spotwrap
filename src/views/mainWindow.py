@@ -358,6 +358,7 @@ class Ui_MainWindow(object):
         self.buttonDownloadAll.setText(QCoreApplication.translate("MainWindow", u"Tout t\u00e9l\u00e9charger", None))
         self.labelBigIcon.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.searchTab), QCoreApplication.translate("MainWindow", u"Recherche", None))
+        self.textEditDownloadProgress.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No current download", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.progressTab), QCoreApplication.translate("MainWindow", u"Progr\u00e8s", None))
     # retranslateUi
 

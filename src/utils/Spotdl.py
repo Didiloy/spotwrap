@@ -19,6 +19,7 @@ import sys
 
 from spotdl import Spotdl
 
+
 class SpotdlSingleton:
     __instance__ = None
 
