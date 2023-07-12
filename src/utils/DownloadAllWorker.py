@@ -52,6 +52,7 @@ class DownloadAllWorker(QRunnable):
     @Slot()  # QtCore.Slot
     def run(self):
         try:
+            self.signals.progress.emit("Starting Download")
             with subprocess.Popen(self.command, stdout=subprocess.PIPE, bufsize=1,
                                   universal_newlines=True) as p:
                 for line in p.stdout:

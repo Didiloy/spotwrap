@@ -27,6 +27,7 @@ import assets.ressource
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setDesktopFileName("SpotWrap")
     load_dotenv()
     config = Config.get_instance()
     translator = QTranslator()

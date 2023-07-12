@@ -40,26 +40,33 @@ class MainWindowController(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.task = None
+        # defining required class variables
         self.signals = MainWindowSignals()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.buttonDownloadAll.setVisible(False)
-        self.ui.buttonPath.setVisible(False)
-        self.ui.progressBarMainWindow.setVisible(False)
-        mainContextMenu = MainContextMenu()
-        self.ui.menuButton.setMenu(mainContextMenu)
-        self.ui.menuButton.menu()
-        self.ui.search.clicked.connect(self.search)
-        # connect the enter key to the search button
-        self.ui.lineEdit.returnPressed.connect(self.ui.search.click)
-        self.ui.buttonPath.clicked.connect(self.select_directory)
-        self.ui.buttonDownloadAll.clicked.connect(self.downloadAll)
         self.searchWorker = SearchWorker("")
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.songs = []
         self.query = ""
+        self.materialYouColorPrimary = ""
+        self.materialYouOnColorOnPrimary = ""
+        self.materialYouColorPrimaryContainer = ""
+        self.materialYouOnColorOnPrimaryContainer = ""
+        self.materialYouButtonColor = ""
+        self.materialYouOnButtonColor = ""
+        # setting up the ui
+        self._setStateOfStartUi()
+        # binding the actions to the buttons
+        self._bindButtonsActions()
+
+    def _setStateOfStartUi(self):
+        self.ui.buttonDownloadAll.setVisible(False)
+        self.ui.buttonPath.setVisible(False)
+        self.ui.progressBarMainWindow.setVisible(False)
+        main_context_menu = MainContextMenu()
+        self.ui.menuButton.setMenu(main_context_menu)
+        self.ui.menuButton.menu()
         self.ui.progressBar.setVisible(False)
         self.ui.labelCoverAlbum.setStyleSheet("padding-left:10px;")
         self.ui.labelDownloadFinished.setVisible(False)
@@ -67,14 +74,15 @@ class MainWindowController(QWidget):
         self.ui.comboBoxOutPutType.addItems(MainWindowController.OUTPUT_FORMAT)
         self.ui.comboBoxQuality.setVisible(False)
         self.ui.comboBoxOutPutType.setVisible(False)
+
+    def _bindButtonsActions(self):
+        self.ui.search.clicked.connect(self.search)
+        # connect the enter key to the search button
+        self.ui.lineEdit.returnPressed.connect(self.ui.search.click)
+        self.ui.buttonPath.clicked.connect(self.select_directory)
+        self.ui.buttonDownloadAll.clicked.connect(self.downloadAll)
         self.ui.comboBoxQuality.currentTextChanged.connect(self.qualityChanged)
         self.ui.comboBoxOutPutType.currentTextChanged.connect(self.outputTypeChanged)
-        self.materialYouColorPrimary = ""
-        self.materialYouOnColorOnPrimary = ""
-        self.materialYouColorPrimaryContainer = ""
-        self.materialYouOnColorOnPrimaryContainer = ""
-        self.materialYouButtonColor = ""
-        self.materialYouOnButtonColor = ""
 
     def qualityChanged(self, quality):
         self.signals.quality.emit(quality)
