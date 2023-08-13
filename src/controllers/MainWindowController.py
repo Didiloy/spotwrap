@@ -35,7 +35,7 @@ class MainWindowSignals(QObject):
 
 
 class MainWindowController(QWidget):
-    QUALITY = ["192K", "8k", "16k", "32k", "96k", "128k", "160k", "256k", "320k"]
+    QUALITY = ["320k", "8k", "16k", "32k", "96k", "128k", "160k", "192k", "256k"]
     OUTPUT_FORMAT = ["mp3", "flac", "m4a", "opus", "ogg"]
 
     def __init__(self):
@@ -243,6 +243,11 @@ class MainWindowController(QWidget):
         self.threadpool.start(self.downloadAllWorker)
 
     def progress(self, progress):
+        # set color to black
+        self.ui.textEditDownloadProgress.setTextColor(QColor(0, 0, 0))
+        if "error" in progress:
+            # change text color to red
+            self.ui.textEditDownloadProgress.setTextColor(QColor(255, 0, 0))
         self.ui.textEditDownloadProgress.append(progress)
 
     def downloadFinished(self, msg):

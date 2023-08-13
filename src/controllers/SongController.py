@@ -35,7 +35,7 @@ class SongController(QWidget):
         self.signals = signals
         self.signals.quality.connect(self.setQuality)
         self.signals.output_type.connect(self.setOutputType)
-        self.quality = "192k"
+        self.quality = "320k"
         self.output_type = "mp3"
         self.ui = Ui_song()
         self.ui.setupUi(self)
@@ -48,7 +48,7 @@ class SongController(QWidget):
             self.song.duration = self.song.duration * 1000
         minutes, seconds = divmod(self.song.duration / 1000, 60)
         minutes = int(minutes)
-        seconds = int(seconds) if seconds > 9 else f"0{int(seconds)}"
+        seconds = int(seconds) if seconds >= 9 else f"0{int(seconds)}"
         self.ui.labelDuration.setText(f"{minutes}:{seconds}")
         self.ui.progressBar.setVisible(False)
         pixmap = QPixmap(":/images/images/check.png")
