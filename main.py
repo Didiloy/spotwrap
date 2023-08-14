@@ -42,9 +42,10 @@ if __name__ == "__main__":
 
 
 def deleteLater():
-    procname = "SpotWrap"
+    procname = ["SpotWrap", "spotdl", "spotdl.exe"]
 
     for proc in psutil.process_iter():
         # check whether the process name matches
-        if proc.name() == procname:
-            proc.kill()
+        for p in procname:
+            if proc.name() == p:
+                proc.kill()
