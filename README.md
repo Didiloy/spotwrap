@@ -1,5 +1,5 @@
 # SpotWrap
-### A graphical wrapper for Spotdl and Savify
+### A graphical wrapper for Spotdl
 ### Gallery
 - Album view : ![Screenshot](assets/readme/image_album.png)
 - Song view : ![Screenshot](assets/readme/image_song.png)
