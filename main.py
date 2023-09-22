@@ -25,9 +25,20 @@ from src.utils.Config import Config
 import assets.ressource
 import psutil
 
+
+def deleteLater():
+    procname = ["SpotWrap", "spotdl", "spotdl.exe"]
+
+    for proc in psutil.process_iter():
+        # check whether the process name matches
+        for p in procname:
+            if proc.name() == p:
+                proc.kill()
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.aboutToQuit.connect(app.deleteLater)
+    app.aboutToQuit.connect(deleteLater)
     app.setDesktopFileName("SpotWrap")
     load_dotenv()
     config = Config.get_instance()
@@ -39,13 +50,3 @@ if __name__ == "__main__":
     qdarktheme.setup_theme("light", default_theme="light")
     window.show()
     sys.exit(app.exec())
-
-
-def deleteLater():
-    procname = ["SpotWrap", "spotdl", "spotdl.exe"]
-
-    for proc in psutil.process_iter():
-        # check whether the process name matches
-        for p in procname:
-            if proc.name() == p:
-                proc.kill()
