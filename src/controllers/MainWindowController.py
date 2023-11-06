@@ -49,7 +49,7 @@ class MainWindowController(QWidget):
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.songs = []
-        self.songs_to_delete_after_download = []
+        self.songs_to_delete_after_download: [Song] = []
         self.query = ""
         self.materialYouColorPrimary = ""
         self.materialYouOnColorOnPrimary = ""
@@ -258,6 +258,9 @@ class MainWindowController(QWidget):
         # set color to black
         self.ui.textEditDownloadProgress.setTextColor(QColor(0, 0, 0))
         if "error" in progress:
+            # change text color to red
+            self.ui.textEditDownloadProgress.setTextColor(QColor(255, 0, 0))
+        if "Error" in progress:
             # change text color to red
             self.ui.textEditDownloadProgress.setTextColor(QColor(255, 0, 0))
         self.ui.textEditDownloadProgress.append(progress)

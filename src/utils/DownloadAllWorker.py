@@ -38,6 +38,7 @@ class DownloadAllWorker(QRunnable):
         self.args = args
         self.kwargs = kwargs
         self.signals = WorkerSignals()
+        output = Config.get_instance().SAVE_PATH + "/{artist} - {title}.{output-ext}"
         self.command = [
             self.resource_path("bin/spotdl"),
             f"{self.query}",
@@ -47,7 +48,7 @@ class DownloadAllWorker(QRunnable):
             f"{self.output_format}",
             "--print-errors",
             "--output",
-            Config.get_instance().SAVE_PATH
+            output
         ]
 
     @Slot()  # QtCore.Slot
