@@ -45,6 +45,7 @@ class DownloadAllWorker(QRunnable):
             f"{self.quality}",
             "--format",
             f"{self.output_format}",
+            "--print-errors",
             "--output",
             Config.get_instance().SAVE_PATH
         ]

@@ -13,6 +13,7 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import os
 
 import requests
 from PySide6.QtCore import QThreadPool, Signal, QObject, Qt
@@ -48,6 +49,7 @@ class MainWindowController(QWidget):
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.songs = []
+        self.songs_to_delete_after_download = []
         self.query = ""
         self.materialYouColorPrimary = ""
         self.materialYouOnColorOnPrimary = ""
@@ -137,10 +139,20 @@ class MainWindowController(QWidget):
             hint = songItem.sizeHint()
             hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
+            item.setText(s.name)
+            item.setForeground(QColor("transparent"))
             item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
             songItem.songSignals.progress.connect(self.progress)
+            songItem.songSignals.deleteSong.connect(self.removeSongFromList)
+
+    def removeSongFromList(self, song):
+        self.songs.remove(song)
+        self.songs_to_delete_after_download.append(song)
+        self.ui.labelNbTitle.setText(f"{len(self.songs)} tracks")
+        songItem = self.ui.listWidget.findItems(song.name, Qt.MatchExactly)[0]
+        self.ui.listWidget.takeItem(self.ui.listWidget.row(songItem))
 
     def getAndSetImageFromUrl(self, imageURL):
         request = requests.get(imageURL, stream=True)
@@ -251,6 +263,7 @@ class MainWindowController(QWidget):
         self.ui.textEditDownloadProgress.append(progress)
 
     def downloadFinished(self, msg):
+        self.deleteUnwantedSongs()
         print("download finished: ", msg)
         pixmap = QPixmap(":/images/images/check.png")
         pixmap = pixmap.scaledToWidth(25)
@@ -268,3 +281,17 @@ class MainWindowController(QWidget):
         self.ui.progressBar.setVisible(False)
         self.ui.lineEdit.setDisabled(False)
         self.ui.search.setDisabled(False)
+
+    def deleteUnwantedSongs(self):
+        output_format = self.ui.comboBoxOutPutType.currentText()
+        for song in self.songs_to_delete_after_download:
+            filename = f"{song.artist} - {song.name}.{output_format}"
+            # delete the file that have been download and that the user doesn't want
+            try:
+                self.progress(f"Deleting {filename}")
+                os.remove(os.path.join(f"{Config.get_instance().SAVE_PATH}", filename))
+            except Exception as e:
+                print("Error while deleting the file: ", e)
+                Config.get_instance().logger.error(e)
+                self.progress(f"Error while deleting the file: {e}")
+        self.songs_to_delete_after_download = []

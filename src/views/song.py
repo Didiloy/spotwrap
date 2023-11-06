@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'song.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -138,12 +138,21 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.labelDuration)
 
+        self.buttonDelete = QPushButton(self.widget_2)
+        self.buttonDelete.setObjectName(u"buttonDelete")
+        self.buttonDelete.setCursor(QCursor(Qt.PointingHandCursor))
+        icon = QIcon()
+        icon.addFile(u":/images/images/delete.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.buttonDelete.setIcon(icon)
+
+        self.horizontalLayout_2.addWidget(self.buttonDelete)
+
         self.buttonDownload = QPushButton(self.widget_2)
         self.buttonDownload.setObjectName(u"buttonDownload")
         self.buttonDownload.setCursor(QCursor(Qt.PointingHandCursor))
-        icon = QIcon()
-        icon.addFile(u":/images/images/download.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.buttonDownload.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/images/images/download.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.buttonDownload.setIcon(icon1)
 
         self.horizontalLayout_2.addWidget(self.buttonDownload)
 
@@ -179,6 +188,7 @@ class Ui_song(object):
         self.labelSongTitle.setText("")
         self.labelSongArtists.setText("")
         self.labelDuration.setText("")
+        self.buttonDelete.setText("")
         self.buttonDownload.setText("")
         self.labelDownloadFinished.setText("")
     # retranslateUi

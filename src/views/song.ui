@@ -201,6 +201,20 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="buttonDelete">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../../assets/ressource.qrc">
+          <normaloff>:/images/images/delete.png</normaloff>:/images/images/delete.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="buttonDownload">
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>

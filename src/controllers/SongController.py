@@ -25,6 +25,7 @@ from src.views.song import Ui_song
 
 class SongSignals(QObject):
     progress = Signal(object)
+    deleteSong = Signal(object)
 
 
 class SongController(QWidget):
@@ -56,6 +57,7 @@ class SongController(QWidget):
         self.ui.labelDownloadFinished.setPixmap(pixmap)
         self.ui.labelDownloadFinished.setVisible(False)
         self.ui.buttonDownload.clicked.connect(self.downloadSong)
+        self.ui.buttonDelete.clicked.connect(self.deleteSong)
         self.downloadAllWorker = None
         self.threadpool = QThreadPool()
         self.query = self.song.url
@@ -63,6 +65,7 @@ class SongController(QWidget):
         # self.getAndSetImageFromUrl(self.song.cover_url)
         self.getImageWorker.signals.result.connect(self.setImage)
         self.threadpool.start(self.getImageWorker)
+
 
     def setQuality(self, quality):
         self.quality = quality
@@ -80,6 +83,9 @@ class SongController(QWidget):
         self.downloadAllWorker.signals.progress.connect(self.emitProgress)
         # Execute
         self.threadpool.start(self.downloadAllWorker)
+
+    def deleteSong(self):
+        self.songSignals.deleteSong.emit(self.song)
 
     def emitProgress(self, progress):
         self.songSignals.progress.emit(progress)

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/delete.png</file>
     <file>images/menu.png</file>
     <file>images/download_icon.png</file>
     <file>images/folder.png</file>
