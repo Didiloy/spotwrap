@@ -124,23 +124,23 @@ class MainWindowController(QWidget):
         self.ui.search.setDisabled(False)
         self.ui.comboBoxQuality.setVisible(True)
         self.ui.comboBoxOutPutType.setVisible(True)
-        self.setStyleSheet(f"background-color:{self.materialYouColorPrimary};color:{self.materialYouOnColorOnPrimary};")
-        self.ui.widget_3.setStyleSheet(
-            f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
-        self.ui.scrollArea.setStyleSheet(
-            f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
-        self.ui.buttonDownloadAll.setStyleSheet(
-            f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
+        # self.setStyleSheet(f"background-color:{self.materialYouColorPrimary};color:{self.materialYouOnColorOnPrimary};")
+        # self.ui.widget_3.setStyleSheet(
+        #     f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
+        # self.ui.scrollArea.setStyleSheet(
+        #     f"background-color:{self.materialYouColorPrimaryContainer};border:0px;border-radius:10px;")
+        # self.ui.buttonDownloadAll.setStyleSheet(
+        #     f"background-color:{self.materialYouButtonColor};color:{self.materialYouOnButtonColor};border:none;border-radius:10px;")
         songs = self.sortSongs(songs)
         for s in songs:
             songItem = SongController(s, self.signals)
-            songItem.setStyleSheet(
-                f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
+            # songItem.setStyleSheet(
+            #     f"background-color:{self.materialYouColorPrimaryContainer};color:{self.materialYouOnColorOnPrimaryContainer};border:0px;border-radius:10px;")
             hint = songItem.sizeHint()
             hint.setWidth(self.ui.listWidget.width() - 10)
             item = QListWidgetItem(self.ui.listWidget)
-            item.setText(s.name)
-            item.setForeground(QColor("transparent"))
+            item.setText("   " + s.name) # 3 spaces to be invisible in th eui
+            # item.setForeground(QColor("transparent"))
             item.setSizeHint(hint)
             self.ui.listWidget.addItem(item)
             self.ui.listWidget.setItemWidget(item, songItem)
@@ -151,7 +151,7 @@ class MainWindowController(QWidget):
         self.songs.remove(song)
         self.songs_to_delete_after_download.append(song)
         self.ui.labelNbTitle.setText(f"{len(self.songs)} tracks")
-        songItem = self.ui.listWidget.findItems(song.name, Qt.MatchExactly)[0]
+        songItem = self.ui.listWidget.findItems("   " + song.name, Qt.MatchExactly)[0]
         self.ui.listWidget.takeItem(self.ui.listWidget.row(songItem))
 
     def getAndSetImageFromUrl(self, imageURL):
@@ -177,25 +177,25 @@ class MainWindowController(QWidget):
         self.ui.labelCoverAlbum.setPixmap(rounded)
 
         # Setting the material you color of the album
-        try:
-            request = requests.get(imageURL, stream=True)
-            color = Colors.get_instance().getDominantColorFromImage(request.raw)
-            primaryColor = color["secondary"]
-            self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
-            colorOnPrimary = color["onSecondary"]
-            self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
-            primaryContainer = color["primaryContainer"]
-            self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
-            colorOnPrimaryContainer = color["onPrimaryContainer"]
-            self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
-            buttonColor = color["primary"]
-            self.materialYouButtonColor = f"rgb({buttonColor[0]},{buttonColor[1]},{buttonColor[2]})"
-            onButtonColor = color["onPrimary"]
-            self.materialYouOnButtonColor = f"rgb({onButtonColor[0]},{onButtonColor[1]},{onButtonColor[2]})"
-        except Exception as e:
-            print("Error while getting the color of the album: ", e)
-            self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
-            self.materialYouOnColorOnPrimary = Colors.get_instance().ON_SECONDARY_BACKGROUND_COLOR
+        # try:
+        #     request = requests.get(imageURL, stream=True)
+        #     color = Colors.get_instance().getDominantColorFromImage(request.raw)
+        #     primaryColor = color["secondary"]
+        #     self.materialYouColorPrimary = f"rgb({primaryColor[0]},{primaryColor[1]},{primaryColor[2]})"
+        #     colorOnPrimary = color["onSecondary"]
+        #     self.materialYouOnColorOnPrimary = f"rgb({colorOnPrimary[0]},{colorOnPrimary[1]},{colorOnPrimary[2]})"
+        #     primaryContainer = color["primaryContainer"]
+        #     self.materialYouColorPrimaryContainer = f"rgb({primaryContainer[0]},{primaryContainer[1]},{primaryContainer[2]})"
+        #     colorOnPrimaryContainer = color["onPrimaryContainer"]
+        #     self.materialYouOnColorOnPrimaryContainer = f"rgb({colorOnPrimaryContainer[0]},{colorOnPrimaryContainer[1]},{colorOnPrimaryContainer[2]})"
+        #     buttonColor = color["primary"]
+        #     self.materialYouButtonColor = f"rgb({buttonColor[0]},{buttonColor[1]},{buttonColor[2]})"
+        #     onButtonColor = color["onPrimary"]
+        #     self.materialYouOnButtonColor = f"rgb({onButtonColor[0]},{onButtonColor[1]},{onButtonColor[2]})"
+        # except Exception as e:
+        #     print("Error while getting the color of the album: ", e)
+        #     self.materialYouColorPrimary = Colors.get_instance().SECONDARY_BACKGROUND_COLOR
+        #     self.materialYouOnColorOnPrimary = Colors.get_instance().ON_SECONDARY_BACKGROUND_COLOR
 
     def resetUI(self):
         self.songs = []

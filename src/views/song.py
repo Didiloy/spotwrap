@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'song.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.2
+## Created by: Qt User Interface Compiler version 6.7.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -25,7 +25,7 @@ class Ui_song(object):
         if not song.objectName():
             song.setObjectName(u"song")
         song.resize(599, 100)
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(song.sizePolicy().hasHeightForWidth())
@@ -33,34 +33,38 @@ class Ui_song(object):
         song.setMinimumSize(QSize(0, 80))
         self.horizontalLayout = QHBoxLayout(song)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.widget_2 = QWidget(song)
-        self.widget_2.setObjectName(u"widget_2")
-        sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
-        self.widget_2.setSizePolicy(sizePolicy)
-        self.widget_2.setMinimumSize(QSize(0, 80))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget_2)
+        self.frame_2 = QFrame(song)
+        self.frame_2.setObjectName(u"frame_2")
+        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy)
+        self.frame_2.setMinimumSize(QSize(0, 80))
+        self.frame_2.setStyleSheet(u"padding: 0px 5px; margin-bottom: 0px;")
+        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Sunken)
+        self.horizontalLayout_2 = QHBoxLayout(self.frame_2)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(-1, 0, -1, -1)
-        self.labelTrackNumber = QLabel(self.widget_2)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, -1)
+        self.labelTrackNumber = QLabel(self.frame_2)
         self.labelTrackNumber.setObjectName(u"labelTrackNumber")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.labelTrackNumber.sizePolicy().hasHeightForWidth())
         self.labelTrackNumber.setSizePolicy(sizePolicy1)
+        self.labelTrackNumber.setStyleSheet(u"margin-left: 5px;")
 
         self.horizontalLayout_2.addWidget(self.labelTrackNumber)
 
-        self.line_2 = QFrame(self.widget_2)
+        self.line_2 = QFrame(self.frame_2)
         self.line_2.setObjectName(u"line_2")
-        self.line_2.setFrameShape(QFrame.VLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
+        self.line_2.setFrameShape(QFrame.Shape.VLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.horizontalLayout_2.addWidget(self.line_2)
 
-        self.widget_3 = QWidget(self.widget_2)
+        self.widget_3 = QWidget(self.frame_2)
         self.widget_3.setObjectName(u"widget_3")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
@@ -68,36 +72,36 @@ class Ui_song(object):
         self.widget_3.setMinimumSize(QSize(0, 79))
         self.verticalLayout_2 = QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalSpacer_3 = QSpacerItem(20, 29, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 29, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer_3)
 
         self.labelAlbumCover = QLabel(self.widget_3)
         self.labelAlbumCover.setObjectName(u"labelAlbumCover")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.labelAlbumCover.sizePolicy().hasHeightForWidth())
         self.labelAlbumCover.setSizePolicy(sizePolicy3)
         self.labelAlbumCover.setMinimumSize(QSize(70, 70))
-        self.labelAlbumCover.setAlignment(Qt.AlignCenter)
+        self.labelAlbumCover.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.labelAlbumCover)
 
-        self.verticalSpacer = QSpacerItem(20, 29, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 29, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout_2.addWidget(self.widget_3)
 
-        self.widget = QWidget(self.widget_2)
+        self.widget = QWidget(self.frame_2)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.labelSongTitle = QLabel(self.widget)
         self.labelSongTitle.setObjectName(u"labelSongTitle")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.labelSongTitle.sizePolicy().hasHeightForWidth())
@@ -111,8 +115,8 @@ class Ui_song(object):
 
         self.line = QFrame(self.widget)
         self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.line.setFrameShape(QFrame.Shape.HLine)
+        self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.line)
 
@@ -129,16 +133,16 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.widget)
 
-        self.horizontalSpacer = QSpacerItem(507, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(507, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
-        self.labelDuration = QLabel(self.widget_2)
+        self.labelDuration = QLabel(self.frame_2)
         self.labelDuration.setObjectName(u"labelDuration")
 
         self.horizontalLayout_2.addWidget(self.labelDuration)
 
-        self.buttonDelete = QPushButton(self.widget_2)
+        self.buttonDelete = QPushButton(self.frame_2)
         self.buttonDelete.setObjectName(u"buttonDelete")
         self.buttonDelete.setCursor(QCursor(Qt.PointingHandCursor))
         icon = QIcon()
@@ -147,7 +151,7 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.buttonDelete)
 
-        self.buttonDownload = QPushButton(self.widget_2)
+        self.buttonDownload = QPushButton(self.frame_2)
         self.buttonDownload.setObjectName(u"buttonDownload")
         self.buttonDownload.setCursor(QCursor(Qt.PointingHandCursor))
         icon1 = QIcon()
@@ -156,7 +160,7 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.buttonDownload)
 
-        self.progressBar = QProgressBar(self.widget_2)
+        self.progressBar = QProgressBar(self.frame_2)
         self.progressBar.setObjectName(u"progressBar")
         sizePolicy3.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
         self.progressBar.setSizePolicy(sizePolicy3)
@@ -167,13 +171,13 @@ class Ui_song(object):
 
         self.horizontalLayout_2.addWidget(self.progressBar)
 
-        self.labelDownloadFinished = QLabel(self.widget_2)
+        self.labelDownloadFinished = QLabel(self.frame_2)
         self.labelDownloadFinished.setObjectName(u"labelDownloadFinished")
 
         self.horizontalLayout_2.addWidget(self.labelDownloadFinished)
 
 
-        self.horizontalLayout.addWidget(self.widget_2)
+        self.horizontalLayout.addWidget(self.frame_2)
 
 
         self.retranslateUi(song)

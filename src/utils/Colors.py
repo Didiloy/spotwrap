@@ -17,8 +17,7 @@ import json
 from typing import Dict
 
 from materialyoucolor.scheme.scheme import Scheme
-from materialyoucolor.utils.theme_utils import getDominantColors, themeFromSourceColor
-
+# from materialyoucolor.utils.theme_utils import getDominantColors, themeFromSourceColor
 
 class Colors:
     __instance__ = None
@@ -41,10 +40,10 @@ class Colors:
             Colors()
         return Colors.__instance__
 
-    def getDominantColorFromImage(self, image, onColor=False) -> Dict:
-        argbs = getDominantColors(image, quality=5, default_chunk=128)
-        argb = argbs[1]  # choose index
-        color = themeFromSourceColor(argb)
-        # 40 is for the primary color and 100 is for the onColor
-        theme = json.loads(color["schemes"]["light"].toJSON())
-        return theme
+    # def getDominantColorFromImage(self, image, onColor=False) -> Dict:
+    #     argbs = getDominantColors(image, quality=5, default_chunk=128)
+    #     argb = argbs[1]  # choose index
+    #     color = themeFromSourceColor(argb)
+    #     # 40 is for the primary color and 100 is for the onColor
+    #     theme = json.loads(color["schemes"]["light"].toJSON())
+    #     return theme

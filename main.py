@@ -20,7 +20,8 @@ from PySide6.QtWidgets import QApplication
 from dotenv import load_dotenv
 
 from src.controllers.MainWindowController import MainWindowController
-import qdarktheme
+#import qdarktheme
+from qt_material import apply_stylesheet
 from src.utils.Config import Config
 import assets.ressource
 import psutil
@@ -47,6 +48,7 @@ if __name__ == "__main__":
     QCoreApplication.installTranslator(translator)
     window = MainWindowController()
     # setup stylesheet
-    qdarktheme.setup_theme("light", default_theme="light")
+    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True)
+    #qdarktheme.setup_theme("light", default_theme="light")
     window.show()
     sys.exit(app.exec())

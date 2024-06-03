@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>805</width>
-    <height>574</height>
+    <height>625</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -42,7 +42,7 @@
          <item row="0" column="0">
           <widget class="QWidget" name="widget_6" native="true">
            <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
+            <enum>Qt::LayoutDirection::LeftToRight</enum>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <property name="spacing">
@@ -85,7 +85,7 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignRight">
+            <item alignment="Qt::AlignmentFlag::AlignRight">
              <widget class="QPushButton" name="menuButton">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -128,7 +128,7 @@
        <item row="1" column="0">
         <layout class="QVBoxLayout" name="verticalLayout">
          <property name="sizeConstraint">
-          <enum>QLayout::SetMaximumSize</enum>
+          <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
          </property>
          <item>
           <widget class="QWidget" name="widget" native="true">
@@ -161,7 +161,7 @@
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignRight">
+            <item alignment="Qt::AlignmentFlag::AlignRight">
              <widget class="QPushButton" name="search">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -282,7 +282,7 @@
                      <item>
                       <spacer name="horizontalSpacer_2">
                        <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
+                        <enum>Qt::Orientation::Horizontal</enum>
                        </property>
                        <property name="sizeHint" stdset="0">
                         <size>
@@ -375,7 +375,7 @@
                      <item>
                       <spacer name="horizontalSpacer">
                        <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
+                        <enum>Qt::Orientation::Horizontal</enum>
                        </property>
                        <property name="sizeHint" stdset="0">
                         <size>
@@ -391,7 +391,7 @@
                         <cursorShape>PointingHandCursor</cursorShape>
                        </property>
                        <property name="sizeAdjustPolicy">
-                        <enum>QComboBox::AdjustToContents</enum>
+                        <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
                        </property>
                       </widget>
                      </item>
@@ -438,7 +438,7 @@
               </layout>
              </widget>
             </item>
-            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+            <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
              <widget class="QLabel" name="labelBigIcon">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -462,14 +462,14 @@
                <bool>true</bool>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <set>Qt::AlignmentFlag::AlignCenter</set>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QScrollArea" name="scrollArea">
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="widgetResizable">
                <bool>true</bool>
@@ -487,16 +487,16 @@
                 <item row="0" column="0">
                  <widget class="QListWidget" name="listWidget">
                   <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
+                   <enum>QFrame::Shape::NoFrame</enum>
                   </property>
                   <property name="resizeMode">
-                   <enum>QListView::Adjust</enum>
+                   <enum>QListView::ResizeMode::Adjust</enum>
                   </property>
                   <property name="spacing">
                    <number>0</number>
                   </property>
                   <property name="viewMode">
-                   <enum>QListView::ListMode</enum>
+                   <enum>QListView::ViewMode::ListMode</enum>
                   </property>
                  </widget>
                 </item>
