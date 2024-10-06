@@ -19,7 +19,7 @@ from PySide6.QtWidgets import QWidget
 from src.views import GPL3_LICENCE
 from src.views.about import Ui_About
 
-VERSION = "1.5"
+VERSION = "1.6"
 
 
 class AboutController(QWidget):
