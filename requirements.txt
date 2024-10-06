@@ -49,7 +49,6 @@ pyinstaller==6.7.0
 pyinstaller-hooks-contrib==2024.6
 pykakasi==2.3.0b1
 pyparsing==3.1.2
-PyQtDarkTheme-fork==2.3.2
 PySide6==6.7.1
 PySide6_Addons==6.7.1
 PySide6_Essentials==6.7.1
