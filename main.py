@@ -15,13 +15,11 @@
 #     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import sys
 
-from PySide6.QtCore import QTranslator, QCoreApplication
+from PySide6.QtCore import QTranslator, QCoreApplication, QFile, QTextStream
 from PySide6.QtWidgets import QApplication
 from dotenv import load_dotenv
 
 from src.controllers.MainWindowController import MainWindowController
-#import qdarktheme
-from qt_material import apply_stylesheet
 from src.utils.Config import Config
 import assets.ressource
 import psutil
@@ -48,7 +46,10 @@ if __name__ == "__main__":
     QCoreApplication.installTranslator(translator)
     window = MainWindowController()
     # setup stylesheet
-    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True)
-    #qdarktheme.setup_theme("light", default_theme="light")
+    # set stylesheet
+    file = QFile(":/stylesheet/stylesheet.qss")
+    file.open(QFile.ReadOnly | QFile.Text)
+    stream = QTextStream(file)
+    app.setStyleSheet(stream.readAll())
     window.show()
     sys.exit(app.exec())
