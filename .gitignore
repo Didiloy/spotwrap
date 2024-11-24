@@ -1,8 +1,5 @@
-spotwrap_venv
 .env
-.idea
-./**/*.pyc
-**__pycache__**
-.cache
-output
-ffmpeg_win
+node_modules
+out
+resources/bin/*
+dist
