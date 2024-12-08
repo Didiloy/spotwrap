@@ -1,6 +1,6 @@
 {
   "name": "spotwrap",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A electron based music downloader written in Python. It's a graphical wrapper around Spotdl ",
   "main": "./out/main/index.js",
   "author": "com.github.Didiloy",
