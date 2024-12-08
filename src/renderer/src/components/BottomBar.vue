@@ -7,7 +7,7 @@
       <span>{{ is_connected ? 'Connected' : 'Not connected' }} to the Spotify api</span>
       <span> {{ is_connected ? '(' + time_left_in_minutes + ' minutes left)' : '' }}</span>
     </div>
-    <div v-if="update_in_download !== ''">
+    <div v-if="update_in_download !== ''" style="text-overflow: ellipsis">
       <span>| Downloading:</span>
       <span>{{ update_in_download }}</span>
     </div>
@@ -16,7 +16,7 @@
 <script setup>
 import { useConnected } from '../store/connected.js'
 import { storeToRefs } from 'pinia'
-import { computed, watch, ref } from 'vue'
+import { computed, ref } from 'vue'
 const { is_connected, time_left, try_connect } = storeToRefs(useConnected())
 
 const time_left_in_minutes = computed(() => {
@@ -34,6 +34,7 @@ window.electron.ipcRenderer.on('update_in_download', (event, arg) => {
 .bb-container {
   width: 100%;
   height: 25px;
+  max-height: 25px;
   background-color: white;
   position: fixed;
   bottom: 0;
@@ -43,9 +44,11 @@ window.electron.ipcRenderer.on('update_in_download', (event, arg) => {
   justify-content: start;
   align-items: center;
   flex-direction: row;
+  text-overflow: ellipsis;
   padding-left: 10px;
 }
 span {
   margin-left: 5px;
+  text-overflow: ellipsis;
 }
 </style>
